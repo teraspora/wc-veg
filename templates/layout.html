@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+  <head>
+    {% block head %}
+      <meta charset="utf-8">
+      <meta name="description" content="West Cork Vegetables">
+      <meta name="author" content="John Lynch">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+      <title>
+        {% block title %}
+        {% endblock %}
+      </title>
+    {% endblock %}
+  </head>
+
+  <body>
+
+    <main class="main">
+      {% block content %}
+      {% endblock %}
+    </main> 
+    
+  </body>
+
+</html>

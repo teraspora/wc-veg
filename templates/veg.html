@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	West Cork Vegetables
+{% endblock %}
+
+{% block head %}
+  	{{ super() }}
+{% endblock %}
+
+{% block content %}
+   
+    <section class="veg-list">
+
+        {% for v in veg %}
+           <tr>
+              <th> {{ v.name }} </th>
+              <td> {{ v.genus }} </td>
+              <td> {{ v.species }} </td>
+              <td> {{ v.category_name }} </td>
+           </tr>
+        {% endfor %} 
+
+    </section>
+
+{% endblock %}
