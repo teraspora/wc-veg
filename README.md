@@ -192,4 +192,106 @@ error: failed to push some refs to 'https://git.heroku.com/wcveg.git'
 (venv) 18:04 /west-cork-veg: 2052$ 
  
 ```
+Created requirements.txt with
+`$ pip3 freeze --local > requirements.txt`
+
+Then push worked, dependencies installed etc.:
+
+```
+$ git push -u heroku master 
+Counting objects: 11, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (11/11), 17.84 KiB | 1.78 MiB/s, done.
+Total 11 (delta 1), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote: 
+remote: -----> Python app detected
+remote: -----> Installing python-3.6.7
+remote: -----> Installing pip
+remote: -----> Installing SQLite3
+remote: -----> Installing requirements with pip
+remote:        Collecting atomicwrites==1.2.1 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 1))
+remote:          Downloading https://files.pythonhosted.org/packages/3a/9a/9d878f8d885706e2530402de6417141129a943802c084238914fa6798d97/atomicwrites-1.2.1-py2.py3-none-any.whl
+remote:        Collecting attrs==18.2.0 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 2))
+remote:          Downloading https://files.pythonhosted.org/packages/3a/e1/5f9023cc983f1a628a8c2fd051ad19e76ff7b142a0faf329336f9a62a514/attrs-18.2.0-py2.py3-none-any.whl
+remote:        Collecting click==6.7 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 3))
+remote:          Downloading https://files.pythonhosted.org/packages/34/c1/8806f99713ddb993c5366c362b2f908f18269f8d792aff1abfd700775a77/click-6.7-py2.py3-none-any.whl (71kB)
+remote:        Collecting cycler==0.10.0 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 4))
+remote:          Downloading https://files.pythonhosted.org/packages/f7/d2/e07d3ebb2bd7af696440ce7e754c59dd546ffe1bbe732c8ab68b9c834e61/cycler-0.10.0-py2.py3-none-any.whl
+remote:        Collecting Django==1.11 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 5))
+remote:          Downloading https://files.pythonhosted.org/packages/47/a6/078ebcbd49b19e22fd560a2348cfc5cec9e5dcfe3c4fad8e64c9865135bb/Django-1.11-py2.py3-none-any.whl (6.9MB)
+remote:        Collecting Flask==1.0.2 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 6))
+remote:          Downloading https://files.pythonhosted.org/packages/7f/e7/08578774ed4536d3242b14dacb4696386634607af824ea997202cd0edb4b/Flask-1.0.2-py2.py3-none-any.whl (91kB)
+remote:        Collecting itsdangerous==0.24 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 7))
+remote:          Downloading https://files.pythonhosted.org/packages/dc/b4/a60bcdba945c00f6d608d8975131ab3f25b22f2bcfe1dab221165194b2d4/itsdangerous-0.24.tar.gz (46kB)
+remote:        Collecting Jinja2==2.10 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 8))
+remote:          Downloading https://files.pythonhosted.org/packages/7f/ff/ae64bacdfc95f27a016a7bed8e8686763ba4d277a78ca76f32659220a731/Jinja2-2.10-py2.py3-none-any.whl (126kB)
+remote:        Collecting kiwisolver==1.0.1 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 9))
+remote:          Downloading https://files.pythonhosted.org/packages/69/a7/88719d132b18300b4369fbffa741841cfd36d1e637e1990f27929945b538/kiwisolver-1.0.1-cp36-cp36m-manylinux1_x86_64.whl (949kB)
+remote:        Collecting MarkupSafe==1.0 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 10))
+remote:          Downloading https://files.pythonhosted.org/packages/4d/de/32d741db316d8fdb7680822dd37001ef7a448255de9699ab4bfcbdf4172b/MarkupSafe-1.0.tar.gz
+remote:        Collecting matplotlib==3.0.1 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 11))
+remote:          Downloading https://files.pythonhosted.org/packages/1e/f8/4aba1144dad8c67db060049d1a8bc740ad9fa35288d21b82bb85de69ff15/matplotlib-3.0.1-cp36-cp36m-manylinux1_x86_64.whl (12.9MB)
+remote:        Collecting more-itertools==5.0.0 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 12))
+remote:          Downloading https://files.pythonhosted.org/packages/a4/a6/42f17d065bda1fac255db13afc94c93dbfb64393eae37c749b4cb0752fc7/more_itertools-5.0.0-py3-none-any.whl (52kB)
+remote:        Collecting numpy==1.15.4 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 13))
+remote:          Downloading https://files.pythonhosted.org/packages/ff/7f/9d804d2348471c67a7d8b5f84f9bc59fd1cefa148986f2b74552f8573555/numpy-1.15.4-cp36-cp36m-manylinux1_x86_64.whl (13.9MB)
+remote:        Collecting pandas==0.23.3 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 14))
+remote:          Downloading https://files.pythonhosted.org/packages/f4/cb/a801eaf624e36fffaa6cf1f4597a1e4b0742c200ed928e689c58fb3cb811/pandas-0.23.3-cp36-cp36m-manylinux1_x86_64.whl (8.9MB)
+remote:        Collecting pluggy==0.8.1 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 15))
+remote:          Downloading https://files.pythonhosted.org/packages/2d/60/f58d9e8197f911f9405bf7e02227b43a2acc2c2f1a8cbb1be5ecf6bfd0b8/pluggy-0.8.1-py2.py3-none-any.whl
+remote:        Collecting py==1.7.0 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 16))
+remote:          Downloading https://files.pythonhosted.org/packages/3e/c7/3da685ef117d42ac8d71af525208759742dd235f8094221fdaafcd3dba8f/py-1.7.0-py2.py3-none-any.whl (83kB)
+remote:        Collecting pyparsing==2.3.0 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 17))
+remote:          Downloading https://files.pythonhosted.org/packages/71/e8/6777f6624681c8b9701a8a0a5654f3eb56919a01a78e12bf3c73f5a3c714/pyparsing-2.3.0-py2.py3-none-any.whl (59kB)
+remote:        Collecting pytest==4.1.1 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 18))
+remote:          Downloading https://files.pythonhosted.org/packages/9e/bf/2974be45c498a0ebc2708bfada25d5d1874ab3315a4e76ce7d38e29724fa/pytest-4.1.1-py2.py3-none-any.whl (216kB)
+remote:        Collecting python-dateutil==2.7.5 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 19))
+remote:          Downloading https://files.pythonhosted.org/packages/74/68/d87d9b36af36f44254a8d512cbfc48369103a3b9e474be9bdfe536abfc45/python_dateutil-2.7.5-py2.py3-none-any.whl (225kB)
+remote:        Collecting pytz==2018.5 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 20))
+remote:          Downloading https://files.pythonhosted.org/packages/30/4e/27c34b62430286c6d59177a0842ed90dc789ce5d1ed740887653b898779a/pytz-2018.5-py2.py3-none-any.whl (510kB)
+remote:        Collecting scipy==1.1.0 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 21))
+remote:          Downloading https://files.pythonhosted.org/packages/a8/0b/f163da98d3a01b3e0ef1cab8dd2123c34aee2bafbb1c5bffa354cc8a1730/scipy-1.1.0-cp36-cp36m-manylinux1_x86_64.whl (31.2MB)
+remote:        Collecting six==1.12.0 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 22))
+remote:          Downloading https://files.pythonhosted.org/packages/73/fb/00a976f728d0d1fecfe898238ce23f502a721c0ac0ecfedb80e0d88c64e9/six-1.12.0-py2.py3-none-any.whl
+remote:        Collecting virtualenv==16.2.0 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 23))
+remote:          Downloading https://files.pythonhosted.org/packages/6a/d1/e0d142ce7b8a5c76adbfad01d853bca84c7c0240e35577498e20bc2ade7d/virtualenv-16.2.0-py2.py3-none-any.whl (1.9MB)
+remote:        Collecting Werkzeug==0.14.1 (from -r /tmp/build_a46e1bb81b709b5381ceed35947f3f2d/requirements.txt (line 24))
+remote:          Downloading https://files.pythonhosted.org/packages/20/c4/12e3e56473e52375aa29c4764e70d1b8f3efa6682bef8d0aae04fe335243/Werkzeug-0.14.1-py2.py3-none-any.whl (322kB)
+remote:        Installing collected packages: atomicwrites, attrs, click, six, cycler, pytz, Django, MarkupSafe, Jinja2, Werkzeug, itsdangerous, Flask, kiwisolver, pyparsing, numpy, python-dateutil, matplotlib, more-itertools, pandas, pluggy, py, pytest, scipy, virtualenv
+remote:          Running setup.py install for MarkupSafe: started
+remote:            Running setup.py install for MarkupSafe: finished with status 'done'
+remote:          Running setup.py install for itsdangerous: started
+remote:            Running setup.py install for itsdangerous: finished with status 'done'
+remote:        Successfully installed Django-1.11 Flask-1.0.2 Jinja2-2.10 MarkupSafe-1.0 Werkzeug-0.14.1 atomicwrites-1.2.1 attrs-18.2.0 click-6.7 cycler-0.10.0 itsdangerous-0.24 kiwisolver-1.0.1 matplotlib-3.0.1 more-itertools-5.0.0 numpy-1.15.4 pandas-0.23.3 pluggy-0.8.1 py-1.7.0 pyparsing-2.3.0 pytest-4.1.1 python-dateutil-2.7.5 pytz-2018.5 scipy-1.1.0 six-1.12.0 virtualenv-16.2.0
+remote: 
+remote: -----> Discovering process types
+remote:        Procfile declares types -> (none)
+remote: 
+remote: -----> Compressing...
+remote:        Done: 127.6M
+remote: -----> Launching...
+remote:        Released v3
+remote:        https://wcveg.herokuapp.com/ deployed to Heroku
+remote: 
+remote: Verifying deploy... done.
+To https://git.heroku.com/wcveg.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'heroku'.
+(venv) 18:09 /west-cork-veg: 2057$ 
+```
+
+Added Procfile with
+`$ echo 'web: python3 app.py' > Procfile`
+	[NOTE: you MUST have a SPACE after the COLON!]
+
+```(venv) 18:14 /west-cork-veg: 2063$ heroku ps:scale web=1
+Scaling dynos... done, now running web at 1:Free
+(venv) 18:19 /west-cork-veg: 2064$ 
+```
+
+Set IP (0.0.0.0) and PORT (5000) in Heroku dashboard.
+Clicked "Open App" and my Hello World page was displayed by the browser.
 
