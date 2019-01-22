@@ -52,8 +52,8 @@ h1, h2 {
 
 td * {
     color: var(--medium-light-text-col);
-    padding: 1vw;
-    font-size: 2vw;
+    padding: 20px;
+    font-size: 3vw;
 } 
 
 th {
