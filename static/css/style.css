@@ -29,7 +29,7 @@ body, html {
     align-items: center;
     justify-content: space-around;
     align-content: start;  
-    background-color: var(--bkg-col);         
+    background-color: var(--dark-bkg-col);         
     color: var(--light-text-col);
     padding: 1vh 1vw;
 }
@@ -52,7 +52,7 @@ h1, h2 {
 
 tr {
     color: var(--medium-light-text-col);
-    font-size: 2.2vmax;
+    font-size: 4vw;
 } 
 
 tr:first-child {
