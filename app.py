@@ -1,12 +1,13 @@
 import os
 from flask import Flask, request, render_template, redirect, url_for
-from flask_pymongo import flask_pymongo
+from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = "wc-veg"
 app.config["MONGO_URI"] = "mongodb://<dbuser>:<dbpassword>@ds163054.mlab.com:63054/wc-veg"
 
-mongo = bPyMongo(app)
+mongo = PyMongo(app)
 
 @app.route("/")
 @app.route("/get_veg")
