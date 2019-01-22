@@ -312,3 +312,14 @@ Actually needed:
 `$ pip3 install Flask-PyMongo`
 This sorted the dependency.
 
+Then had to do another 
+`sudo pip3 freeze --local > requirements.txt`
+to satisfy the new dependency remotely.
+
+Then had to insert my dbs authentication info into the MongoDB URI:
+`mongodb://<dbuser>:<dbpassword>@ds163054.mlab.com:63054/wc-veg`
+
+Then it worked and displayed the single record set up.
+
+
+
