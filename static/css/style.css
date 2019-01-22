@@ -46,7 +46,7 @@ h1, h2 {
     font-weight: normal;
 }
 
-td * {
+tr * {
     color: var(--medium-light-text-col);
     padding: 20px;
     font-size: 3vw;
