@@ -295,3 +295,20 @@ Scaling dynos... done, now running web at 1:Free
 Set IP (0.0.0.0) and PORT (5000) in Heroku dashboard.
 Clicked "Open App" and my Hello World page was displayed by the browser.
 
+Getting infrastructure and wiring set up;
+
+Did:
+`$ sudo pip3 install flask-pymongo`
+but app failed with 
+```
+(venv) 00:01 /west-cork-veg: 2090$ python app.py 
+Traceback (most recent call last):
+  File "app.py", line 3, in <module>
+    from flask_pymongo import PyMongo
+ModuleNotFoundError: No module named 'flask_pymongo'
+```
+
+Actually needed:
+`$ pip3 install Flask-PyMongo`
+This sorted the dependency.
+
