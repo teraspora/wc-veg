@@ -50,11 +50,12 @@ h1, h2 {
     color: var(--medium-light-text-col);
 }
 
-tr {
+td * {
     color: var(--medium-light-text-col);
-    font-size: 4vw;
+    padding: 1vw;
+    font-size: 2vw;
 } 
 
-tr:first-child {
+th {
     color: var(--bright-border-col);
 }
