@@ -10,34 +10,19 @@
 
 {% block content %}
    
-    <section class="veg-list">
+    <section class="section veg-list">
 
+	    <table border = 5>
         {% for v in veg %}
-	        <table border = 5>
-	           <tr>
-	              <th> {{ v.common_name }} </th>
-	              <td> {{ v.genus }} </td>
-	              <td> {{ v.species }} </td>
-	              <td> {{ v.category_name }} </td>
-	           </tr>
-	        </table>
+         <tr>
+            <th> {{ v.common_name }} </th>
+            <td> {{ v.genus }} </td>
+            <td> {{ v.species }} </td>
+            <td> {{ v.category_name }} </td>
+         </tr>
         {% endfor %} 
+	    </table>
 
     </section>
-
-    <ul class="collapsible" data-collapsible="accordion">
-    <li>
-      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-    <li>	
-      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-  </ul>
 
 {% endblock %}
