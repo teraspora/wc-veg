@@ -321,5 +321,7 @@ Then had to insert my dbs authentication info into the MongoDB URI:
 
 Then it worked and displayed the single record set up.
 
+After creating some more documents within the vegetables collection in my wc-veg MongoDB database, one document per vegetable, with a few fields, and two more documents
+
 
 
