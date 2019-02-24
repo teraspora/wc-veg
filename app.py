@@ -31,13 +31,14 @@ class User:
 
 
 
-@app.route("/get_veg", methods = ["GET", "POST"]) 
-def get_veg():
+@app.route("/veg", methods = ["GET", "POST"])
+def veg():
     if request.method == "GET" and (request.args.get("logout_button")  or session.get("userid", None) is None):
         session["userid"] = -1
         return redirect(url_for("index"))        
         
-    if request.method == "POST":
+    if request.method == "POST" and request.form["form_id"] == "login":
+        print(request.args.get("action"), file=sys.stdout)
         print(dict(request.form), file=sys.stdout)
         uname = request.form["uname"]
         userid = next((i for i, user in enumerate(users) if user.name == uname), -1)
@@ -51,9 +52,8 @@ def get_veg():
             
         session["userid"] = userid # save userid on client
     
-        # if coming from "Next problem" button in mark.html:
-        userid = session.get("userid", None)
-        user = users[userid]
+    userid = session.get("userid", None)
+    user = users[userid]
     
     return render_template("veg.html", veg = mongo.db.vegetables.find(), uname = user.name)
 
@@ -64,7 +64,14 @@ def login():
 
 @app.route("/addveg")
 def addveg():
-    return render_template("addveg.html")
+    return render_template("addveg.html", categories = mongo.db.categories.find())
+
+@app.route("/insertveg", methods = ["POST"]) 
+def insertveg():
+    veg = mongo.db.vegetables
+    veg.insert_one(request.form.to_dict())
+    return redirect(url_for("veg.html", veg = mongo.db.vegetables.find(), uname = user.name))
+
 
 
 

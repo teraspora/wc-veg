@@ -11,8 +11,9 @@
 {% block content %}
    <h3>Add Veg</h3>
 <div class="row">
-    <form action="" method="POST" class="col s12">
-        <div class="row">
+    <form action="/veg" method="POST" class="col s12">
+        <input type="hidden" name="form_id" value="addveg">
+    <div class="row">
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">category</i>
@@ -27,27 +28,44 @@
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="task_name" name="task_name" type="text">
-                <label for="icon_prefix">Veg Name</label>
+                <input id="veg_name" name="veg_name" type="text">
+                <label for="veg_name">Veg Name</label>
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="task_name" name="task_name" type="text">
-                <label for="icon_prefix">Genus</label>
+                <input id="genus" name="genus" type="text">
+                <label for="genus">Genus</label>
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="task_name" name="task_name" type="text">
-                <label for="icon_prefix">Species</label>
+                <input id="species" name="species" type="text">
+                <label for="species">Species</label>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">subject</i>
+                <textarea name="veg_description" id="veg_description" class="materialize-textarea"></textarea>
+                <label for="veg_description">Veg Description</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">subject</i>
-                <textarea name="task_description" id="task_description" class="materialize-textarea"></textarea>
-                <label for="icon_telephone">Veg Description</label>
+                <textarea name="growing_notes" id="growing_notes" class="materialize-textarea"></textarea>
+                <label for="growing_notes">Growing Notes</label>
             </div>
         </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">subject</i>
+                <textarea name="cooking_notes" id="cooking_notes" class="materialize-textarea"></textarea>
+                <label for="cooking_notes">Cooking Notes</label>
+            </div>
+        </div> -->
+        <button class="btn waves-effect waves-light" type="submit" name="action">Add to Database
+            <i class="material-icons right">send</i>
+        </button>
     </form>
 </div>
 {% endblock %} 
