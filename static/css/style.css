@@ -45,4 +45,8 @@ header * {
 
 .nav-wrapper {
     min-height: 100px;
+}
+
+.genus {
+    text-transform: capitalize;
 } 
