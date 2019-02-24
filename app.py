@@ -72,9 +72,15 @@ def insertveg():
     if userid is None:
         return redirect(url_for("index"))
     user = users[userid]
-    veg = mongo.db.vegetables
-    veg.insert_one(request.form.to_dict())
-    return redirect(url_for("veg.html", veg = mongo.db.vegetables.find(), uname = user.name))
+    form_data = request.form.to_dict()
+    veg_list = mongo.db.vegetables
+    # Only add if not already in collection
+    if veg_list.count_documents({"common_name": form_data["common_name"]}) == 0:
+        veg_list.insert_one(form_data)
+    else:
+        # for debugging; change!
+        print("Will not insert duplicate of veg already in list of vegetables!")
+    return redirect(url_for("veg", veg = mongo.db.vegetables.find(), uname = user.name))
 
 
 
