@@ -11,7 +11,7 @@ body, html {
 }
 
 header {
-  background-color: #ffddcc;
+  background-color: #821a00;
   background-position: center;
   min-height: 100px; 
   max-height: 100px;
@@ -28,15 +28,16 @@ header {
 
 header * {
     opacity: 1.0;
+    border-radius: 10px;
 }
 
 .main-link {
-    font-size: 2.4vw;
+    font-size: 1.4vw;
     float: right;
 }
 
 .site-name {
-    font-size: 3.3vw;
+    font-size: 2.3vw;
     font-weight: bold;
     position: relative;
     left: -10vw;
@@ -47,7 +48,7 @@ header * {
     min-height: 100px;
 }
 
-.genus, .veg-name {
+.genus, .common-name {
     text-transform: capitalize;
     font-size: 1.2vw;
 }
@@ -56,10 +57,8 @@ header * {
     font-size: 1vw;
 }
 
-.btn {
+/*.btn {
     font-size: 2.4vw;
-    background-color: var(--btn-col);
-    color: var(--bright-border-col);
     width: 20vw;
     height: 10vw;
     padding: 3px 3px;
@@ -77,7 +76,7 @@ header * {
     border: 6px groove var(--light-text-col);
     border-radius: 5px;
 }
-
+*/
 .btn-login {
     justify-self: center;
 }

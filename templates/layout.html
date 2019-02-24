@@ -20,33 +20,35 @@
 
   <body>
       <!-- navbar -->
-    <header>
-      <nav class="nav-wrapper transparent ">
-        <div class="container">
-          <a href="#" class="brand-logo teal-text"><h1 class="left site-name">West Cork Veg</h1></a>
-          <a href="#" class="sidenav-trigger" data-target="mobile-menu">
-            <i class="material-icons">menu</i>
-          </a>
-          <ul class="right hide-on-med-and-down">
-            <li><a class="teal-text text-lighten-3 right" href="#"><h2 class="main-link">Browse Veg</h2> </a></li>
-            <li><a class="teal-text text-lighten-3 right" href="#"><h2 class="main-link">Add Info</h2> </a></li>
-            <li><a class="teal-text text-lighten-3 right" href="#"><h2 class="main-link">Find Veg</h2> </a></li>
-            <li><a class="teal-text text-lighten-3 right" href="#"><h2 class="main-link">About</h2> </a></li>
-          </ul>
-          <ul class="sidenav grey lighten-2" id="mobile-menu">
-            <li><a class="teal-text text-darken-3" href="#"><h2 class="main-link">Browse Veg</h2> </a></li>
-            <li><a class="teal-text text-darken-3" href="#"><h2 class="main-link">Add Info</h2> </a></li>
-            <li><a class="teal-text text-darken-3" href="#"><h2 class="main-link">Find Veg</h2> </a></li>
-            <li><a class="teal-text text-darken-3" href="#"><h2 class="main-link">About</h2> </a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <div class="container">
+      <header class="">
+        <nav class="nav-wrapper transparent ">
+          <div class="container">
+            <a href="#" class="brand-logo teal-text"><h1 class="left site-name">West Cork Veg</h1></a>
+            <a href="#" class="sidenav-trigger" data-target="mobile-menu">
+              <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+              <li><a class="lime-text text-accent-1 right" href="#"><h2 class="main-link">Browse Veg</h2> </a></li>
+              <li><a class="lime-text text-accent-1 right" href="#"><h2 class="main-link">Add Info</h2> </a></li>
+              <li><a class="lime-text text-accent-1 right" href="#"><h2 class="main-link">Find Veg</h2> </a></li>
+              <li><a class="lime-text text-accent-1 right" href="#"><h2 class="main-link">About</h2> </a></li>
+            </ul>
+            <ul class="sidenav grey lighten-2" id="mobile-menu">
+              <li><a class="lime-text text-accent-1 href="#"><h2 class="main-link">Browse Veg</h2> </a></li>
+              <li><a class="lime-text text-accent-1 href="#"><h2 class="main-link">Add Info</h2> </a></li>
+              <li><a class="lime-text text-accent-1 href="#"><h2 class="main-link">Find Veg</h2> </a></li>
+              <li><a class="lime-text text-accent-1 href="#"><h2 class="main-link">About</h2> </a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
         
-    <main class="main">
-      {% block content %}
-      {% endblock %}
-    </main> 
+      <main class="main">
+        {% block content %}
+        {% endblock %}
+      </main> 
+    </div>
 
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
