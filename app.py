@@ -68,6 +68,10 @@ def addveg():
 
 @app.route("/insertveg", methods = ["POST"]) 
 def insertveg():
+    userid = session.get("userid", None)
+    if userid is None:
+        return redirect(url_for("index"))
+    user = users[userid]
     veg = mongo.db.vegetables
     veg.insert_one(request.form.to_dict())
     return redirect(url_for("veg.html", veg = mongo.db.vegetables.find(), uname = user.name))

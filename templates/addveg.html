@@ -11,13 +11,13 @@
 {% block content %}
    <h3>Add Veg</h3>
 <div class="row">
-    <form action="/veg" method="POST" class="col s12">
+    <form action="/insertveg" method="POST" class="col s12">
         <input type="hidden" name="form_id" value="addveg">
     <div class="row">
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">category</i>
-                    <select id="category" name="category_name">
+                    <select id="category_name" name="category_name">
                   <option value="" disabled selected>Choose Category</option>
                   {% for cat in categories %}
                       <option value="{{cat.category_name}}">{{cat.category_name}}</option>
@@ -28,8 +28,8 @@
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="veg_name" name="veg_name" type="text">
-                <label for="veg_name">Veg Name</label>
+                <input id="common_name" name="common_name" type="text">
+                <label for="common_name">Veg Name</label>
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
