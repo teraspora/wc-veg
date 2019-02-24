@@ -47,6 +47,11 @@ header * {
     min-height: 100px;
 }
 
-.genus {
+.genus, .veg-name {
     text-transform: capitalize;
-} 
+    font-size: 1.2vw;
+}
+
+.species, .veg-category {
+    font-size: 1vw;
+}

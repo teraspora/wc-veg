@@ -15,10 +15,10 @@
 	    <table border = 5>
         {% for v in veg %}
          <tr>
-            <th> {{ v.common_name }} </th>
+            <th class = "veg-name"> {{ v.common_name }} </th>
             <td class = "genus"> {{ v.genus }} </td>
-            <td> {{ v.species }} </td>
-            <td> {{ v.category_name }} </td>
+            <td class = "species"> {{ v.species }} </td>
+            <td class = "veg-category"> {{ v.category_name }} </td>
          </tr>
         {% endfor %} 
 	    </table>
