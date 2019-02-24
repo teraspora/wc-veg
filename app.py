@@ -62,6 +62,10 @@ def get_veg():
 def login():
     return render_template("login.html")
 
+@app.route("/addveg")
+def addveg():
+    return render_template("addveg.html")
+
 
 
 

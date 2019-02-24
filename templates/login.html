@@ -9,11 +9,20 @@
 {% endblock %}
 
 {% block content %}
-   <form class="login-form" action = "/get_veg" method = "POST">
-     <header>
-     	Login to West Cork Veg...
-     </header>
-     <input class="name" autofocus type = "text" name = "uname"/>
- 	 <input class="btn btn-login" type = "submit" value = "Login"/>
- 	 </form>
+    <form class="login-form" "center-align" action = "/get_veg" method = "POST">
+	    <header>
+	     	Login to West Cork Veg...
+	    </header>
+	    <div class="row center-align">
+	    	<div class="input-field col s12 l12">
+	    		<i class="material-icons prefix">person</i>
+	    		<input class="name" autofocus type = "text" name = "uname"/>
+	    		<label for="icon_prefix">Name</label>
+	    	</div>
+		<div class="row center-align">
+	 		<div class="col s12 l12">	    		
+	    		<input class="btn btn-login" type = "submit" value = "Login"/>
+	    	</div>
+		</div>
+ 	</form>
 {% endblock %} 

@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	{{ "Add a New Vegetable" }}
+{% endblock %}
+
+{% block head %}
+  	{{ super() }}
+{% endblock %}
+
+{% block content %}
+   <h3>Add Veg</h3>
+<div class="row">
+    <form action="" method="POST" class="col s12">
+        <div class="row">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">category</i>
+                    <select id="category" name="category_name">
+                  <option value="" disabled selected>Choose Category</option>
+                  {% for cat in categories %}
+                      <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                  {% endfor %}
+                </select>
+                    <label>Veg Category</label>
+                </div>
+            </div>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">grade</i>
+                <input id="task_name" name="task_name" type="text">
+                <label for="icon_prefix">Veg Name</label>
+            </div>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">grade</i>
+                <input id="task_name" name="task_name" type="text">
+                <label for="icon_prefix">Genus</label>
+            </div>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">grade</i>
+                <input id="task_name" name="task_name" type="text">
+                <label for="icon_prefix">Species</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">subject</i>
+                <textarea name="task_description" id="task_description" class="materialize-textarea"></textarea>
+                <label for="icon_telephone">Veg Description</label>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %} 
