@@ -55,3 +55,36 @@ header * {
 .species, .veg-category {
     font-size: 1vw;
 }
+
+.btn {
+    font-size: 2.4vw;
+    background-color: var(--btn-col);
+    color: var(--bright-border-col);
+    width: 20vw;
+    height: 10vw;
+    padding: 3px 3px;
+    text-align: center;
+    font-weight: bold;
+    -webkit-box-shadow: 0 0 1px 1px;
+            box-shadow: 0 0 1px 1px;
+    cursor: pointer;
+    margin: 1px 1px 1px 1px;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: -webkit-transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s;
+    transition: transform 0.5s, -webkit-transform 0.5s;
+    border: 6px groove var(--light-text-col);
+    border-radius: 5px;
+}
+
+.btn-login {
+    justify-self: center;
+}
+
+.name {
+    font-size: 3vw;
+    padding: 1vh 1vw;
+    border: 8px ridge gold;    
+}
+

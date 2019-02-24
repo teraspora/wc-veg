@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	{{ "Login to West Cork Veg" }}
+{% endblock %}
+
+{% block head %}
+  	{{ super() }}
+{% endblock %}
+
+{% block content %}
+   <form class="login-form" action = "/get_veg" method = "POST">
+     <header>
+     	Login to West Cork Veg...
+     </header>
+     <input class="name" autofocus type = "text" name = "uname"/>
+ 	 <input class="btn btn-login" type = "submit" value = "Login"/>
+ 	 </form>
+{% endblock %} 
