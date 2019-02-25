@@ -54,6 +54,7 @@ header * {
 
 .container {
     background: #f9fbe7;
+    border: 3px ridge black;
 }
 
 .genus, .common_name {
