@@ -33,17 +33,17 @@
         </div>
         <div class="input-field col s12">
             <i class="material-icons prefix">grade</i>
-            <input class = "common_name" id="common_name" name="common_name" type="text" value="{{veg.common_name}}">
+            <input class = "common_name" id="common_name" name="common_name" type="text" pattern="[A-Za-z]{2,}" required> value="{{veg.common_name}}">
             <label for="common_name">Veg Name</label>
         </div>
         <div class="input-field col s12">
             <i class="material-icons prefix">grade</i>
-            <input class = "genus" id="genus" name="genus" type="text" value="{{veg.genus}}">
+            <input class = "genus" id="genus" name="genus" type="text" pattern="[A-Za-z]{3,}" value="{{veg.genus}}">
             <label for="genus">Genus</label>
         </div>
         <div class="input-field col s12">
             <i class="material-icons prefix">grade</i>
-            <input id="species" name="species" type="text" value="{{veg.species}}">
+            <input id="species" name="species" type="text" pattern="[A-Za-z]{3,}" value="{{veg.species}}">
             <label for="species">Species</label>
         </div>
         <div class="input-field col s12">

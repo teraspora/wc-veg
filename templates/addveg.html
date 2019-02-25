@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-   <h3>Add Veg</h3>
+   <h4>Create a new vegetable entry...</h4>
 <div class="row">
     <form action="/insertveg" method="POST" class="col s12">
         <input type="hidden" name="form_id" value="addveg">
@@ -29,17 +29,17 @@
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="common_name" name="common_name" type="text">
+                <input id="common_name" name="common_name" type="text" pattern="[A-Za-z]{2,}" required>
                 <label for="common_name">Veg Name</label>
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="genus" name="genus" type="text">
+                <input id="genus" name="genus" type="text" pattern="[A-Za-z]{3,}">
                 <label for="genus">Genus</label>
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="species" name="species" type="text">
+                <input id="species" name="species" type="text" pattern="[A-Za-z]{3,}">
                 <label for="species">Species</label>
             </div>
         </div>
@@ -70,10 +70,10 @@
                 <label for="cook_notes">Cooking Notes</label>
             </div>
         </div>
-        <button class="btn text-bold black-text green accent-4  waves-effect waves-light" type="submit" name="action">Add to Database
+        <button class="btn black-text green accent-4 waves-effect waves-light" type="submit" name="add">Add to Database
             <i class="material-icons right">send</i>
         </button>
-        <button class="btn text-bold black-text orange accent-4  waves-effect waves-light right" name="action"><a href="{{ url_for('veg') }}">Cancel</a>
+        <button class="btn black-text orange accent-4 waves-effect waves-light right" name="cancel"><a href="{{ url_for('veg') }}">Cancel</a>
             <i class="material-icons right">cancel</i>
         </button>
     </form>
