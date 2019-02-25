@@ -90,9 +90,17 @@ def editveg(veg_id):
     cats = mongo.db.categories.find()
     return render_template("editveg.html", veg = veg, categories = cats)
 
-@app.route("/updateveg/<veg_id>")
+@app.route("/updateveg/<veg_id>", methods = ['POST'])
 def updateveg(veg_id):
-    return render_template("updateveg.html")
+    veg_list = mongo.db.vegetables
+    veg_list.update({'_id': ObjectId(veg_id)},
+        {
+            "common_name": request.form.get("common_name"),
+            "genus": request.form.get("genus"),
+            "species" : request.form.get("species"),
+            "category_name": request.form.get("category_name")        
+        })
+    return redirect(url_for("veg"))
 
 
 
