@@ -44,6 +44,7 @@ def about():
 @app.route("/veg", methods = ["GET", "POST"])
 def veg():
     """ Show a table of all veg in database. """
+
     if request.method == "GET" and (request.args.get("logout_button")  or session.get("userid", None) is None):
         session["userid"] = -1
         return redirect(url_for("index"))        
@@ -64,6 +65,8 @@ def veg():
         session["userid"] = userid # save userid on client
     
     userid = session.get("userid", None)
+    if userid is None or userid == -1:
+        return redirect(url_for("index"))
     user = users[userid]
     
     return render_template("veg.html", veg = mongo.db.vegetables.find(), uname = user.name)
@@ -77,6 +80,10 @@ def login():
 @app.route("/addveg")
 def addveg():
     """ Render a form to allow user to add a new veg to database. """
+    userid = session.get("userid", None)
+    if userid is None or userid == -1:
+        return redirect(url_for("index"))
+
     return render_template("addveg.html", categories = mongo.db.categories.find())
 
 @app.route("/insertveg", methods = ["POST"]) 
@@ -99,6 +106,10 @@ def insertveg():
 @app.route("/editveg/<veg_id>")
 def editveg(veg_id):
     """ Render a form to allow user to edit a veg. """
+    userid = session.get("userid", None)
+    if userid is None or userid == -1:
+        return redirect(url_for("index"))
+
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
     cats = mongo.db.categories.find()
     return render_template("editveg.html", veg = veg, categories = cats)
@@ -106,19 +117,31 @@ def editveg(veg_id):
 @app.route("/updateveg/<veg_id>", methods = ['POST'])
 def updateveg(veg_id):
     """ Insert the amended document into database and then show the updated veg table. """
+    userid = session.get("userid", None)
+    if userid is None or userid == -1:
+        return redirect(url_for("index"))
+
     veg_list = mongo.db.vegetables
     veg_list.update({'_id': ObjectId(veg_id)},
         {
             "common_name": request.form.get("common_name"),
             "genus": request.form.get("genus"),
             "species" : request.form.get("species"),
-            "category_name": request.form.get("category_name")        
+            "category_name": request.form.get("category_name"),
+            "other_names" : request.form.get("other_names"),
+            "description" : request.form.get("description"),
+            "grow_notes" : request.form.get("grow_notes"),
+            "cook_notes" : request.form.get("cook_notes")        
         })
     return redirect(url_for("veg"))
 
 @app.route("/deleteveg/<veg_id>")
 def deleteveg(veg_id):
     """ Delete a document from the database and then show the updated veg table. """
+    userid = session.get("userid", None)
+    if userid is None or userid == -1:
+        return redirect(url_for("index"))
+
     mongo.db.vegetables.remove({"_id": ObjectId(veg_id)})
     return redirect(url_for("veg"))
 
