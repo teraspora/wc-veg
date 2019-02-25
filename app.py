@@ -65,11 +65,13 @@ def veg():
         session["userid"] = userid # save userid on client
     
     userid = session.get("userid", None)
-    if userid is None or userid == -1:
-        return redirect(url_for("index"))
-    user = users[userid]
+    if userid is None or userid == -1 or user.name == 'anon':
+        anon = True
+    else:
+        anon = False
+        user = users[userid]
     
-    return render_template("veg.html", veg = mongo.db.vegetables.find(), uname = user.name)
+    return render_template("veg.html", veg = mongo.db.vegetables.find(), anon = anon, uname = user.name)
 
 @app.route("/")
 @app.route("/login")
