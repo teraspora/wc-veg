@@ -28,10 +28,13 @@
             <td class = "species"> {{ v.species }} </td>
             <td class = "veg-category"> {{ v.category_name }} </td>
             <td class="show">
-              <a href = "#" class="deep-orange accent-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
+              <a href = "#" class="light-green darken-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
             </td>
             <td class="edit ">
-              <a href = "{{url_for("editveg", veg_id = v._id)}}" class="light-green darken-4 waves-effect waves-light btn-small"><i class="material-icons right">edit</i>Edit</a>
+              <a href = "{{url_for("editveg", veg_id = v._id)}}" class="cyan accent-4 waves-effect waves-light btn-small"><i class="material-icons right">edit</i>Edit</a>
+            </td>
+            <td class="delete ">
+              <a href = "{{url_for("deleteveg", veg_id = v._id)}}" class="deep-orange accent-4 waves-effect waves-light btn-small"><i class="material-icons right">delete_forever</i>Delete</a>
             </td>
          </tr>
         {% endfor %} 

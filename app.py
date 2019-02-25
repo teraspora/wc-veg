@@ -102,8 +102,11 @@ def updateveg(veg_id):
         })
     return redirect(url_for("veg"))
 
-
-
+@app.route("/deleteveg/<veg_id>")
+def deleteveg(veg_id):
+    mongo.db.vegetables.remove({"_id": ObjectId(veg_id)})
+    return redirect(url_for("veg"))
+    
 
 if __name__ == "__main__":
     app.run(host = os.environ.get('IP', "0.0.0.0"),
