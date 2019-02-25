@@ -45,12 +45,15 @@ def about():
 def veg():
     """ Show a table of all veg in database. """
     user = User('anon', False)     # set to None so we can test the name property below
+    anon = True
     if request.method == "GET" and (request.args.get("logout_button")  or session.get("userid", None) is None):
         session["userid"] = -1
         return redirect(url_for("index"))        
         
     if request.method == "POST" and request.form["form_id"] == "login":
+        # DEBUG STATEMENT:
         print(request.args.get("action"), file=sys.stdout)
+        # DEBUG STATEMENT:
         print(dict(request.form), file=sys.stdout)
         uname = request.form["uname"]
         userid = next((i for i, user in enumerate(users) if user.name == uname), -1)
@@ -63,13 +66,17 @@ def veg():
             user = users[userid]
             
         session["userid"] = userid # save userid on client
+        anon = False
     
     userid = session.get("userid", None)
+    # DEBUG STATEMENT:
+    print(f'{userid}   {user.name}')
     if userid is None or userid == -1 or user.name == 'anon':
         anon = True
     else:
         anon = False
         user = users[userid]
+    print(f'Anon is {anon}')
     
     return render_template("veg.html", veg = mongo.db.vegetables.find(), anon = anon, uname = user.name)
 
