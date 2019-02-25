@@ -18,24 +18,28 @@ user = ''
 userid = -1
 
 class User:
-    """ User class represents a user and associated data """
+    """ Represents a user and associated data """
     def __init__(self, name = "anon", admin = False):
         """ Create a user """
         self.name = name
         self.admin = admin
 
-# so we can use this function and variable in template
+# so we can use this function and variable in template:
 # app.jinja_env.globals.update(capitalize = capitalize)
+# ********* ABOVE NOT NEEDED FOR NATIVE FUNCTIONS AND METHODS ***********
+# ********* REMOVE THESE COMMENTS BEFORE PRODUCTION DEPLOYMENT **********
 
 
 
 
 @app.route("/about")
 def about():
+    """ Show info about the site. """
     return render_template("about.html")
 
 @app.route("/veg", methods = ["GET", "POST"])
 def veg():
+    """ Show a table of all veg in database. """
     if request.method == "GET" and (request.args.get("logout_button")  or session.get("userid", None) is None):
         session["userid"] = -1
         return redirect(url_for("index"))        
@@ -63,14 +67,17 @@ def veg():
 @app.route("/")
 @app.route("/login")
 def login():
+    """ Display the login dialogue. """
     return render_template("login.html")
 
 @app.route("/addveg")
 def addveg():
+    """ Render a form to allow user to add a new veg to database. """
     return render_template("addveg.html", categories = mongo.db.categories.find())
 
 @app.route("/insertveg", methods = ["POST"]) 
 def insertveg():
+    """ Insert the new document into database and then show the full veg table. """
     userid = session.get("userid", None)
     if userid is None:
         return redirect(url_for("index"))
@@ -87,12 +94,14 @@ def insertveg():
 
 @app.route("/editveg/<veg_id>")
 def editveg(veg_id):
+    """ Render a form to allow user to edit a veg. """
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
     cats = mongo.db.categories.find()
     return render_template("editveg.html", veg = veg, categories = cats)
 
 @app.route("/updateveg/<veg_id>", methods = ['POST'])
 def updateveg(veg_id):
+    """ Insert the amended document into database and then show the updated veg table. """
     veg_list = mongo.db.vegetables
     veg_list.update({'_id': ObjectId(veg_id)},
         {
@@ -105,11 +114,13 @@ def updateveg(veg_id):
 
 @app.route("/deleteveg/<veg_id>")
 def deleteveg(veg_id):
+    """ Delete a document from the database and then show the updated veg table. """
     mongo.db.vegetables.remove({"_id": ObjectId(veg_id)})
     return redirect(url_for("veg"))
 
 @app.route("/showveg/<veg_id>")
 def showveg(veg_id):
+    """ Show details for an individual veg. """
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
     return render_template("showveg.html", veg = veg)
     

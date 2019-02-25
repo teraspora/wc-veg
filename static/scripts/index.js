@@ -1,3 +1,5 @@
+// Activation functions for Materialize
+
 $(document).ready(function(){
 
   // Activate side navigation for small screens:

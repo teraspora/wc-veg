@@ -1,0 +1,41 @@
+{
+    "category_name": "leafy",
+    "common_name": "rocket",
+    "genus": "eruca",
+    "species": "sativa",
+    "other_names": "arugula"
+}
+
+{
+    "category_name": "leafy",
+    "common_name": "mizuna",
+    "genus": "brassica",
+    "species": "rapa",
+    "variety": "niposinica",
+    "other_names": "Japanese mustard greens"
+}
+
+{
+    "category_name": "leafy",
+    "common_name": "cress",
+    "genus": "lepidium",
+    "species": "sativum",
+    "other_names": "garden cress"
+}
+
+{
+    "category_name": "root",
+    "common_name": "parsnip",
+    "genus": "pastinaca",
+    "species": "sativa"
+}
+
+{
+    "category_name": "bulb",
+    "common_name": "onion",
+    "genus": "allium",
+    "species": "cepa",
+    "other_names": "bulb onion, common onion"
+}
+
+

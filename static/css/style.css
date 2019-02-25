@@ -25,11 +25,11 @@ header {
   padding: 1vw; 
 }
 
-.section {
+/*.section {
     padding-top: 4vh;
     padding-bottom: 4vh;
 }
-
+*/
 header * {
     opacity: 1.0;
     border-radius: 10px;
@@ -50,6 +50,10 @@ header * {
 
 .nav-wrapper {
     min-height: 100px;
+}
+
+.container {
+    background: #f9fbe7;
 }
 
 .genus, .common_name {
@@ -89,11 +93,8 @@ header * {
             box-shadow: 0 0 1px 1px;
     cursor: pointer;
     margin: 1px 1px 1px 1px;
-    -webkit-transition: -webkit-transform 0.5s;
     transition: -webkit-transform 0.5s;
-    -o-transition: transform 0.5s;
     transition: transform 0.5s;
-    transition: transform 0.5s, -webkit-transform 0.5s;
     border: 6px groove var(--light-text-col);
     border-radius: 5px;
 }
@@ -111,17 +112,13 @@ header * {
 .text-bold {
     font-weight: bold;
 }
-
+/* Make alternate rows different shades */
 tr:nth-child(even) {
     background: #f1f8e9; 
 }
 
 tr:nth-child(odd) {
     background: #def5e1; 
-}
-
-.container {
-    background: #f9fbe7;
 }
 
 .flow-text {
