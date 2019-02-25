@@ -13,9 +13,9 @@ app.config["MONGO_URI"] = "mongodb://tsadm:MDBpw256!@ds163054.mlab.com:63054/wc-
 mongo = PyMongo(app)
 
 # Keep a list of known users
-users = []    
-user = ''
+users = [] 
 userid = -1
+anon = True     # means no user logged in so edit/delete not available
 
 class User:
     """ Represents a user and associated data """
@@ -44,7 +44,7 @@ def about():
 @app.route("/veg", methods = ["GET", "POST"])
 def veg():
     """ Show a table of all veg in database. """
-
+    user = User('anon', False)     # set to None so we can test the name property below
     if request.method == "GET" and (request.args.get("logout_button")  or session.get("userid", None) is None):
         session["userid"] = -1
         return redirect(url_for("index"))        
