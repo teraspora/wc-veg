@@ -88,6 +88,7 @@ header * {
     transition: transform 0.5s;
     border: 2px solid black;
     border-radius: 5px;
+    margin: 1vw;
 }
 
 .btn:hover, .dbs-action:hover {
