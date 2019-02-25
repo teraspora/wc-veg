@@ -13,10 +13,10 @@
       <h4>
         Hello {{ uname }}, welcome to West Cork Veg!
       </h4>
-      <a href = "addveg" class="lime accent-4 black-text waves-effect waves-light btn"><i class="material-icons right">add_circle_outline</i>Add Vegetable</a>
-      <p>
+      <a href = "addveg" class="text-bold green accent-4 black-text waves-effect waves-light btn"><i class="material-icons right">add_circle_outline</i>Add Vegetable</a>
+      <h4>
         Check out the vegetables you can grow in West Cork!
-      </p>
+      </h4>
   
     <section class="section veg-list">
 
@@ -28,13 +28,13 @@
             <td class = "species"> {{ v.species }} </td>
             <td class = "veg-category"> {{ v.category_name }} </td>
             <td class="show">
-              <a href = "#" class="light-green darken-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
+              <a href = "#" class="text-bold black-text green accent-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
             </td>
             <td class="edit ">
-              <a href = "{{url_for("editveg", veg_id = v._id)}}" class="cyan accent-4 waves-effect waves-light btn-small"><i class="material-icons right">edit</i>Edit</a>
+              <a href = "{{url_for("editveg", veg_id = v._id)}}" class="text-bold black-text cyan accent-4 waves-effect waves-light btn-small"><i class="material-icons right">edit</i>Edit</a>
             </td>
             <td class="delete ">
-              <a href = "{{url_for("deleteveg", veg_id = v._id)}}" class="deep-orange accent-4 waves-effect waves-light btn-small"><i class="material-icons right">delete_forever</i>Delete</a>
+              <a href = "{{url_for("deleteveg", veg_id = v._id)}}" class="text-bold black-text deep-orange accent-4 waves-effect waves-light btn-small"><i class="material-icons right">delete_forever</i>Delete</a>
             </td>
          </tr>
         {% endfor %} 

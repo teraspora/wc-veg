@@ -87,3 +87,6 @@ header * {
     border: 8px ridge gold;    
 }
 
+.text-bold {
+    font-weight: bold;
+}
