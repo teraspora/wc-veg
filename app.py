@@ -24,7 +24,8 @@ class User:
         self.name = name
         self.admin = admin
 
-
+# so we can use this function and variable in template
+# app.jinja_env.globals.update(capitalize = capitalize)
 
 
 
@@ -47,7 +48,7 @@ def veg():
         
         if userid == -1:    # so it's a new user
             userid = len(users)
-            user = User(uname)
+            user = User(uname, True if uname == "John" else False)
             users.append(user)
         else:               # so we already know this user
             user = users[userid]
@@ -106,6 +107,11 @@ def updateveg(veg_id):
 def deleteveg(veg_id):
     mongo.db.vegetables.remove({"_id": ObjectId(veg_id)})
     return redirect(url_for("veg"))
+
+@app.route("/showveg/<veg_id>")
+def showveg(veg_id):
+    veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
+    return render_template("showveg.html", veg = veg)
     
 
 if __name__ == "__main__":

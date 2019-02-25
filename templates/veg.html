@@ -14,13 +14,19 @@
         Hello {{ uname }}, welcome to West Cork Veg!
       </h4>
       <a href = "addveg" class="text-bold green accent-4 black-text waves-effect waves-light btn"><i class="material-icons right">add_circle_outline</i>Add Vegetable</a>
-      <h4>
+      <h4 class = "right">
         Check out the vegetables you can grow in West Cork!
       </h4>
   
     <section class="section veg-list">
 
 	    <table border = 5>
+        <tr class = "lime accent-1">
+          <th class = "field-name common_name"> Common Name </th>
+            <td class = "field-name genus"> Genus </td>
+            <td class = "field-name species"> Species </td>
+            <td class = "field-name veg-category"> Category </td>
+        </tr>
         {% for v in veg %}
          <tr>
             <th class = "common_name"> {{ v.common_name }} </th>
@@ -28,7 +34,7 @@
             <td class = "species"> {{ v.species }} </td>
             <td class = "veg-category"> {{ v.category_name }} </td>
             <td class="show">
-              <a href = "#" class="text-bold black-text green accent-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
+              <a href = "{{url_for("showveg", veg_id = v._id)}}" class="text-bold black-text green accent-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
             </td>
             <td class="edit ">
               <a href = "{{url_for("editveg", veg_id = v._id)}}" class="text-bold black-text cyan accent-4 waves-effect waves-light btn-small"><i class="material-icons right">edit</i>Edit</a>

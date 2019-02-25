@@ -65,6 +65,15 @@ header * {
     font-style: italic;
 }
 
+.field-name {
+    font-weight: bold;
+}
+
+.welcome {
+    font-style: italic;
+    padding: 2vw;
+}
+
 /*.btn {
     font-size: 2.4vw;
     width: 20vw;
@@ -113,4 +122,8 @@ tr:nth-child(odd) {
 
 .flow-text {
     padding-left: 2vw;
+}
+
+#common_name {
+    text-transform: capitalize;
 }

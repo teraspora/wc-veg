@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-	{{ "Edit Vegetable Info" }}
+	{{ "West Cork Veg - " +  veg.common_name.capitalize() }}
 {% endblock %}
 
 {% block head %}
@@ -9,9 +9,9 @@
 {% endblock %}
 
 {% block content %}
-   <h3>Edit {{ veg.common_name.capitalize() }}</h3>
+   <h3> {{ veg.common_name.capitalize() }} </h3>
 <div class="row">
-    <form action="{{url_for('updateveg', veg_id = veg._id)}}" method="POST" class="col s12">
+    <form action="{{ url_for('veg') }}" class="col s12">
         <input type="hidden" name="form_id" value="addveg">
     <div class="row">
         <div class="row">
