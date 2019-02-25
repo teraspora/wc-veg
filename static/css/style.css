@@ -83,23 +83,18 @@ header * {
     padding-left: 1vw;
 }
 
-/*.btn {
-    font-size: 2.4vw;
-    width: 20vw;
-    height: 10vw;
-    padding: 3px 3px;
-    text-align: center;
-    font-weight: bold;
-    -webkit-box-shadow: 0 0 1px 1px;
-            box-shadow: 0 0 1px 1px;
+.btn, .dbs-action {
     cursor: pointer;
-    margin: 1px 1px 1px 1px;
-    transition: -webkit-transform 0.5s;
     transition: transform 0.5s;
-    border: 6px groove var(--light-text-col);
+    border: 2px solid black;
     border-radius: 5px;
 }
-*/
+
+.btn:hover, .dbs-action:hover {
+    transform: scale(1.08);
+    filter: invert(100%);
+}
+
 .btn-login {
     justify-self: center;
 }
