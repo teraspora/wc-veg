@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	{{ "Edit a Vegetable" }}
+{% endblock %}
+
+{% block head %}
+  	{{ super() }}
+{% endblock %}
+
+{% block content %}
+   <h3>Edit Veg</h3>
+<div class="row">
+    <form action="{{url_for("updateveg", veg_id = veg._id)}}" method="POST" class="col s12">
+        <input type="hidden" name="form_id" value="addveg">
+    <div class="row">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">category</i>
+                <select id="category_name" name="category_name">
+                    <option value="" disabled selected>Choose Category</option>
+                    {% for cat in categories %}
+                        {% if cat.category_name == veg.category_name %}
+                            <option value="{{cat.category_name}}" selected >{{cat.category_name}}</option>
+                        {% else %}
+                            <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <label>Veg Category</label>
+            </div>
+        </div>
+        <div class="input-field col s12">
+            <i class="material-icons prefix">grade</i>
+            <input class = "common_name" id="common_name" name="common_name" type="text" value="{{veg.common_name}}">
+            <label for="common_name">Veg Name</label>
+        </div>
+        <div class="input-field col s12">
+            <i class="material-icons prefix">grade</i>
+            <input class = "genus" id="genus" name="genus" type="text" value="{{veg.genus}}">
+            <label for="genus">Genus</label>
+        </div>
+        <div class="input-field col s12">
+            <i class="material-icons prefix">grade</i>
+            <input id="species" name="species" type="text" value="{{veg.species}}">
+            <label for="species">Species</label>
+        </div>
+    </div>
+        <!-- <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">subject</i>
+                <textarea name="veg_description" id="veg_description" class="materialize-textarea"></textarea>
+                <label for="veg_description">Veg Description</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">subject</i>
+                <textarea name="growing_notes" id="growing_notes" class="materialize-textarea"></textarea>
+                <label for="growing_notes">Growing Notes</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">subject</i>
+                <textarea name="cooking_notes" id="cooking_notes" class="materialize-textarea"></textarea>
+                <label for="cooking_notes">Cooking Notes</label>
+            </div>
+        </div> -->
+        <button class="btn waves-effect waves-light" type="submit" name="action">Add to Database
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
+</div>
+{% endblock %} 

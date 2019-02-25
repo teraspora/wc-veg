@@ -48,7 +48,7 @@ header * {
     min-height: 100px;
 }
 
-.genus, .common-name {
+.genus, .common_name {
     text-transform: capitalize;
     font-size: 1.2vw;
 }

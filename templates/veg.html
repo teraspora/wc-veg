@@ -23,7 +23,7 @@
 	    <table border = 5>
         {% for v in veg %}
          <tr>
-            <th class = "common-name"> {{ v.common_name }} </th>
+            <th class = "common_name"> {{ v.common_name }} </th>
             <td class = "genus"> {{ v.genus }} </td>
             <td class = "species"> {{ v.species }} </td>
             <td class = "veg-category"> {{ v.category_name }} </td>
@@ -31,7 +31,7 @@
               <a href = "#" class="deep-orange accent-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
             </td>
             <td class="edit ">
-              <a href = "#" class="light-green darken-4 waves-effect waves-light btn-small"><i class="material-icons right">edit</i>Edit</a>
+              <a href = "{{url_for("editveg", veg_id = v._id)}}" class="light-green darken-4 waves-effect waves-light btn-small"><i class="material-icons right">edit</i>Edit</a>
             </td>
          </tr>
         {% endfor %} 

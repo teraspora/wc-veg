@@ -84,9 +84,15 @@ def insertveg():
         print("Will not insert duplicate of veg already in list of vegetables!")
     return redirect(url_for("veg", veg = mongo.db.vegetables.find(), uname = user.name))
 
+@app.route("/editveg/<veg_id>")
+def editveg(veg_id):
+    veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
+    cats = mongo.db.categories.find()
+    return render_template("editveg.html", veg = veg, categories = cats)
 
-
-
+@app.route("/updateveg/<veg_id>")
+def updateveg(veg_id):
+    return render_template("updateveg.html")
 
 
 
