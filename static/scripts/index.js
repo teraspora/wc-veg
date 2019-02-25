@@ -19,9 +19,9 @@ $(document).ready(function(){
   // $('.parallax').parallax();
 
   // // Activate tabs
-  // $('.tabs').tabs();
+  $('.tabs').tabs();
   
-  $('.collapsible').collapsible();
+  // $('.collapsible').collapsible();
   
   $('select').formSelect();
   
