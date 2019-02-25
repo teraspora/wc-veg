@@ -35,7 +35,11 @@ class User:
 @app.route("/about")
 def about():
     """ Show info about the site. """
-    return render_template("about.html")
+    userid = session.get("userid", None)
+    if userid is None or userid == -1:
+        return redirect(url_for("index"))
+    user = users[userid]
+    return render_template("about.html", uname = user.name)
 
 @app.route("/veg", methods = ["GET", "POST"])
 def veg():
