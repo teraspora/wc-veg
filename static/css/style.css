@@ -22,7 +22,8 @@ header {
   /*opacity: 0.5;*/
   position: sticky;
   top: 0;
-  z-index: 64; 
+  z-index: 64;
+  padding: 1vw; 
 }
 
 .section {
@@ -72,6 +73,10 @@ header * {
 .welcome {
     font-style: italic;
     padding: 2vw;
+}
+
+.invite {
+    padding-left: 1vw;
 }
 
 /*.btn {
