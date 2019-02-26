@@ -83,7 +83,7 @@ def addveg():
     """ Render a form to allow user to add a new veg to database. """
     userid = session.get("userid", None)
     if userid is None or userid == -1:
-        return redirect(url_for("index"))
+        return redirect(url_for("login"))
     user = users[userid]
     
     return render_template("addveg.html", categories = mongo.db.categories.find(), uname = user.name)
