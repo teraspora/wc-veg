@@ -20,7 +20,8 @@
 	    <div class="row center-align">
 	    	<div class="input-field col s12 l12">
 	    		<i class="material-icons prefix">person</i>
-	    		<input class="name" autofocus type = "text" name = "uname"/>
+	    		<input class="name" autofocus type = "text" pattern="[A-Za-z]{5,}" required oninvalid = "setCustomValidity('Username must be > 4 letters')" 
+   oninput = "setCustomValidity('')" name = "uname"/>
 	    		<label for="icon_prefix">Name</label>
 	    	</div>
 		<div class="row center-align">
