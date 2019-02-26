@@ -94,6 +94,7 @@ header * {
 .btn:hover, .dbs-action:hover {
     transform: scale(1.08);
     filter: invert(100%);
+    border-radius: 12px;
 }
 
 .btn-login {
