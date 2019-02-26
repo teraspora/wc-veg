@@ -1,7 +1,7 @@
-* {
+*, a {
     box-sizing: border-box;
     text-decoration: none;
-    
+    color: inherit;
 }
 
 body, html {
@@ -62,11 +62,11 @@ header * {
     font-size: 1.2vw;
 }
 
-.species, .veg-category {
+.species, .category_name {
     font-size: 1.2vw;
 }
 
-.veg-category {
+.category_name {
     font-style: italic;
 }
 
@@ -91,6 +91,7 @@ header * {
     margin: 1vw;
 }
 
+/* Provide feedback when user hovers over a button */
 .btn:hover, .dbs-action:hover {
     transform: scale(1.08);
     filter: invert(100%);
@@ -127,7 +128,8 @@ tr:nth-child(odd) {
     text-transform: capitalize;
 }
 
-.hide {           /* Used to hide show and edit buttons from non-logged-in users */
+/* Used to hide show and edit buttons from non-logged-in users */
+.hide {           
     display: none;
 }
 
