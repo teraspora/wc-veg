@@ -80,7 +80,7 @@ header * {
 }
 
 .invite {
-    padding-left: 1vw;
+    padding: 1vw;
 }
 
 .btn, .dbs-action {
