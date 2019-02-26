@@ -59,6 +59,7 @@ def veg():
     userid = session.get("userid", None)
     if userid is None or userid < 0:
         anon = True
+        user = User('anon', False)
     else:
         anon = False
         user = users[userid]
@@ -72,7 +73,10 @@ def veg():
 @app.route("/login")
 def login():
     """ Display the login dialogue. """
-    return render_template("login.html", uname = "login")
+    session.pop('userid', None)
+    userid = -1;
+    anon = True;
+    return render_template("login.html", anon = anon)
 
 @app.route("/addveg")
 def addveg():
