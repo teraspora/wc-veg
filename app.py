@@ -62,7 +62,7 @@ def veg():
     else:
         anon = False
         user = users[userid]
-        print(f'User is {user}, userid = {userid}')
+        print(f'User is {user.name}, userid = {userid}')
     # ********* DEBUGGING: ***********
     print(f'Anon is {anon}')
     
@@ -120,8 +120,7 @@ def updateveg(veg_id):
         return redirect(url_for("index"))
     user = users[userid]
     veg_list = mongo.db.vegetables
-    veg_list.update({'_id': ObjectId(veg_id)},
-        {
+    veg_list.update({'_id': ObjectId(veg_id)}, {'$set':{
             "genus": request.form.get("genus"),
             "species" : request.form.get("species"),
             "category_name": request.form.get("category_name"),
@@ -129,7 +128,7 @@ def updateveg(veg_id):
             "description" : request.form.get("description"),
             "grow_notes" : request.form.get("grow_notes"),
             "cook_notes" : request.form.get("cook_notes")        
-        })
+        }})
     return redirect(url_for("veg", uname = user.name))
 
 @app.route("/deleteveg/<veg_id>")
