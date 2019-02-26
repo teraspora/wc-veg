@@ -34,14 +34,14 @@
             <ul class="right hide-on-med-and-down">
               <li><a class="lime-text text-accent-1 right" href = {{ url_for('veg') }}><h2 class="main-link">Browse Veg</h2> </a></li>
               <li><a class="lime-text text-accent-1 right" href = {{ url_for('addveg') }}><h2 class="main-link">Add Info</h2> </a></li>
-              <li><a class="lime-text text-accent-1 right" href = "#"><h2 class="main-link">Find Veg</h2> </a></li>
               <li><a class="lime-text text-accent-1 right" href = {{ url_for('about') }}><h2 class="main-link">About</h2> </a></li>
+              <li><a class="lime-text text-accent-1 {{ '' if uname == 'login' else 'logged-in' }}" right" href = {{ url_for('login') }}><h2 class="main-link">{{ uname.capitalize() }}</h2> </a></li>
             </ul>
             <ul class="sidenav grey lighten-2" id="mobile-menu">
               <li><a class="lime-text text-accent-1" href = {{ url_for('veg') }}><h2 class="main-link">Browse Veg</h2> </a></li>
               <li><a class="lime-text text-accent-1" href = {{ url_for('addveg') }}><h2 class="main-link">Add Info</h2> </a></li>
-              <li><a class="lime-text text-accent-1" href = "#"><h2 class="main-link">Find Veg</h2> </a></li>
               <li><a class="lime-text text-accent-1" href = {{ url_for('about') }}><h2 class="main-link">About</h2> </a></li>
+              <li><a class="lime-text text-accent-1 {{ '' if uname == 'login' else 'logged-in' }}" href = {{ url_for('login') }}><h2 class="main-link">{{ uname.capitalize() }}</h2> </a></li>
             </ul>
           </div>
         </nav>

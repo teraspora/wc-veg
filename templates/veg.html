@@ -12,7 +12,7 @@
 {% block content %}
     <section class="welcome">
       <h4>
-        Hello {{ "friend" if anon else uname }}, welcome to West Cork Veg!
+        Hello {{ "friend" if anon else uname.capitalize() }}, welcome to West Cork Veg!
       </h4>
       <a href = "addveg" class="text-bold green accent-4 black-text waves-effect waves-light btn"><i class="material-icons right">add_circle_outline</i>Add Vegetable</a>
       <h4 class = "right">

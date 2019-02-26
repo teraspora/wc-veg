@@ -62,6 +62,8 @@ def veg():
     else:
         anon = False
         user = users[userid]
+        print(f'User is {user}, userid = {userid}')
+    # ********* DEBUGGING: ***********
     print(f'Anon is {anon}')
     
     return render_template("veg.html", veg = mongo.db.vegetables.find(), anon = anon, uname = user.name)
@@ -70,7 +72,7 @@ def veg():
 @app.route("/login")
 def login():
     """ Display the login dialogue. """
-    return render_template("login.html")
+    return render_template("login.html", uname = "login")
 
 @app.route("/addveg")
 def addveg():
@@ -78,8 +80,9 @@ def addveg():
     userid = session.get("userid", None)
     if userid is None or userid == -1:
         return redirect(url_for("index"))
-
-    return render_template("addveg.html", categories = mongo.db.categories.find())
+    user = users[userid]
+    
+    return render_template("addveg.html", categories = mongo.db.categories.find(), uname = user.name)
 
 @app.route("/insertveg", methods = ["POST"]) 
 def insertveg():
@@ -104,10 +107,10 @@ def editveg(veg_id):
     userid = session.get("userid", None)
     if userid is None or userid == -1:
         return redirect(url_for("index"))
-
+    user = users[userid]
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
     cats = mongo.db.categories.find()
-    return render_template("editveg.html", veg = veg, categories = cats)
+    return render_template("editveg.html", veg = veg, categories = cats, uname = user.name)
 
 @app.route("/updateveg/<veg_id>", methods = ['POST'])
 def updateveg(veg_id):
@@ -115,11 +118,10 @@ def updateveg(veg_id):
     userid = session.get("userid", None)
     if userid is None or userid == -1:
         return redirect(url_for("index"))
-
+    user = users[userid]
     veg_list = mongo.db.vegetables
     veg_list.update({'_id': ObjectId(veg_id)},
         {
-            "common_name": request.form.get("common_name"),
             "genus": request.form.get("genus"),
             "species" : request.form.get("species"),
             "category_name": request.form.get("category_name"),
@@ -128,7 +130,7 @@ def updateveg(veg_id):
             "grow_notes" : request.form.get("grow_notes"),
             "cook_notes" : request.form.get("cook_notes")        
         })
-    return redirect(url_for("veg"))
+    return redirect(url_for("veg", uname = user.name))
 
 @app.route("/deleteveg/<veg_id>")
 def deleteveg(veg_id):
@@ -136,15 +138,19 @@ def deleteveg(veg_id):
     userid = session.get("userid", None)
     if userid is None or userid == -1:
         return redirect(url_for("index"))
-
+    user = users[userid]
     mongo.db.vegetables.remove({"_id": ObjectId(veg_id)})
-    return redirect(url_for("veg"))
+    return redirect(url_for("veg", uname = user.name))
 
 @app.route("/showveg/<veg_id>")
 def showveg(veg_id):
     """ Show details for an individual veg. """
+    userid = session.get("userid", None)
+    if userid is None or userid == -1:
+        return redirect(url_for("index"))
+    user = users[userid]
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
-    return render_template("showveg.html", veg = veg)
+    return render_template("showveg.html", veg = veg, uname = user.name)
     
 
 if __name__ == "__main__":
