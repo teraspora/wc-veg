@@ -18,22 +18,23 @@
       <h4 class = "right">
         Check out the vegetables you can grow in West Cork!
       </h4>
+      <h5 class = "right">Click on a column header to sort by that column.</h5>
     </section>
     <section class="section veg-list">
 
 	    <table border = 5>
         <tr class = "lime accent-1">
-          <th class = "field-name common_name"> Common Name </th>
-            <td class = "field-name genus"> Genus </td>
-            <td class = "field-name species"> Species </td>
-            <td class = "field-name veg-category"> Category </td>
+          <th class = "field-name common_name"> <a href = {{ url_for('sortveg', sort_field = 'common_name') }}>Common Name</a> </th>
+            <td class = "field-name genus"> <a href = {{ url_for('sortveg', sort_field = 'genus') }}>Genus</a> </td>
+            <td class = "field-name species"> <a href = {{ url_for('sortveg', sort_field = 'species') }}>Species</a> </td>
+            <td class = "field-name category_name"> <a href = {{ url_for('sortveg', sort_field = 'category_name') }}>Category</a> </td>
         </tr>
         {% for v in veg %}
          <tr>
             <th class = "common_name"> {{ v.common_name }} </th>
             <td class = "genus"> {{ v.genus }} </td>
             <td class = "species"> {{ v.species }} </td>
-            <td class = "veg-category"> {{ v.category_name }} </td>
+            <td class = "category_name"> {{ v.category_name }} </td>
             <td class="show">
               <a href = "{{url_for("showveg", veg_id = v._id)}}" class="dbs-action text-bold black-text green accent-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
             </td>

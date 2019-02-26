@@ -16,6 +16,7 @@ mongo = PyMongo(app)
 users = [] 
 userid = -1
 anon = True     # means no user logged in so edit/delete not available
+sort_fields = ["common_name", "genus", "species", "category_name"]
 
 class User:
     """ Represents a user and associated data """
@@ -65,9 +66,32 @@ def veg():
         user = users[userid]
         print(f'User is {user.name}, userid = {userid}')
     # ********* DEBUGGING: ***********
-    print(f'Anon is {anon}')
+    print(f'Anon is {anon} (in veg())')
     
     return render_template("veg.html", veg = mongo.db.vegetables.find(), anon = anon, uname = user.name)
+
+@app.route("/sortveg/<string:sort_field>")
+def sortveg(sort_field):
+    # ********* DEBUGGING: ***********
+    print(f'sort_field = {sort_field}')
+    if sort_field not in sort_fields:
+        veg = mongo.db.vegetables.find()
+    else:
+        veg = mongo.db.vegetables.find().sort(sort_field) 
+
+    userid = session.get("userid", None)
+    if userid is None or userid < 0:
+        anon = True
+        user = User('anon', False)
+    else:
+        anon = False
+        user = users[userid]
+        print(f'User is {user.name}, userid = {userid}')
+    # ********* DEBUGGING: ***********
+    print(f'Anon is {anon} (in sortveg())')
+    
+    return render_template("veg.html", veg = veg, anon = anon, uname = user.name)
+
 
 @app.route("/")
 @app.route("/login")
@@ -93,7 +117,7 @@ def insertveg():
     """ Insert the new document into database and then show the full veg table. """
     userid = session.get("userid", None)
     if userid is None:
-        return redirect(url_for("index"))
+        return redirect(url_for("login"))
     user = users[userid]
     form_data = request.form.to_dict()
     veg_list = mongo.db.vegetables
