@@ -10,11 +10,11 @@
 {% endblock %}
 
 {% block content %}
-<h3> {{ veg.common_name.capitalize() }} </h3>
+<h3 class="center"> {{ veg.common_name.capitalize() }} </h3>
 
 <div class="card">
-  <div class="card-content">
-    <h5>Photograph of {{ veg.common_name }}.</h5>
+  <div class="center card-content">
+    <img src="{{ url_for('static', filename='images/' + veg.common_name + '.jpg') }}" alt="Photo of some green veg">
   </div>
   <div class="card-tabs">
     <ul class="tabs tabs-fixed-width">
