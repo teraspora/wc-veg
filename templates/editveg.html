@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-   <h3>Edit {{ veg.common_name.capitalize() }}</h3>
+   <h4>Edit {{ veg.common_name.capitalize() }} (Genus & species must be > 2 lowercase letters)...</h4>
 <div class="row">
     <form action="{{url_for('updateveg', veg_id = veg._id)}}" method="POST" class="col s12">
         <input type="hidden" name="form_id" value="addveg">
@@ -33,17 +33,17 @@
         </div>
         <div class="input-field col s12">
             <i class="material-icons prefix">grade</i>
-            <input class = "common_name" id="common_name" name="common_name" type="text" pattern="[A-Za-z]{2,}" disabled value="{{veg.common_name}}">
+            <input class = "common_name" id="common_name" name="common_name" type="text" disabled value="{{veg.common_name}}">
             <label for="common_name">Veg Name</label>
         </div>
         <div class="input-field col s12">
             <i class="material-icons prefix">grade</i>
-            <input class = "genus" id="genus" name="genus" type="text" pattern="[A-Za-z]{3,}" value="{{veg.genus}}">
+            <input class = "genus" id="genus" name="genus" type="text" pattern="[a-z]{3,}" value="{{veg.genus}}">
             <label for="genus">Genus</label>
         </div>
         <div class="input-field col s12">
             <i class="material-icons prefix">grade</i>
-            <input id="species" name="species" type="text" pattern="[A-Za-z]{3,}" value="{{veg.species}}">
+            <input id="species" name="species" type="text" pattern="[a-z]{3,}" value="{{veg.species}}">
             <label for="species">Species</label>
         </div>
         <div class="input-field col s12">

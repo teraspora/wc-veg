@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-   <h4>Create a new vegetable entry...</h4>
+   <h5>Create a new vegetable entry (Genus & species must be > 2 lowercase letters, name > 1)...</h5>
 <div class="row">
     <form action="/insertveg" method="POST" class="col s12">
         <input type="hidden" name="form_id" value="addveg">
@@ -29,17 +29,17 @@
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="common_name" name="common_name" type="text" pattern="[A-Za-z]{2,}" required>
+                <input id="common_name" name="common_name" type="text" pattern="[a-z]{2,}" required>
                 <label for="common_name">Veg Name</label>
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="genus" name="genus" type="text" pattern="[A-Za-z]{3,}">
+                <input id="genus" name="genus" type="text" pattern="[a-z]{3,}">
                 <label for="genus">Genus</label>
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="species" name="species" type="text" pattern="[A-Za-z]{3,}">
+                <input id="species" name="species" type="text" pattern="[a-z]{3,}">
                 <label for="species">Species</label>
             </div>
         </div>
