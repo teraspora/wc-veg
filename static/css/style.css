@@ -16,54 +16,50 @@ body, html {
 
 header {
   background-position: center;
-  min-height: 100px; 
-  max-height: 100px;
-  /*opacity: 0.5;*/
+  min-height: 120px; 
   position: sticky;
-  top: 0;
   z-index: 64;
-  padding: 1vw; 
 }
 
-/*.section {
-    padding-top: 4vh;
-    padding-bottom: 4vh;
-}
-*/
 header * {
     opacity: 1.0;
     border-radius: 10px;
 }
 
 .main-link {
-    font-size: 1.4vw;
-    float: right;
+    font-size: 1.8vw;
+    border: 2px ridge orange;
+    padding: 5px;
 }
 
 .site-name {
-    font-size: 2.3vw;
+    font-size: 2.8vw;
     font-weight: bold;
-    position: relative;
-    left: -10vw;
-    top: -1.5vh;
+    padding-left: 3vw;
+    margin-top: 5%;
 }
 
-.nav-wrapper {
+/*.nav-wrapper {
     min-height: 100px;
 }
-
+*/
 .container {
     background: #f9fbe7;
     border: 3px ridge black;
 }
 
-.genus, .common_name {
-    text-transform: capitalize;
+.genus, .common_name, .species, .category_name {
     font-size: 1.2vw;
 }
 
-.species, .category_name {
-    font-size: 1.2vw;
+.genus, .common_name, #common_name {
+    text-transform: capitalize;
+}
+
+@media only screen and (max-width: 1024px) {
+   .genus, .common_name, .species, .category_name, #common_name {
+        font-size: 2.2vw;
+   } 
 }
 
 .category_name {
@@ -92,7 +88,7 @@ header * {
 }
 
 /* Provide feedback when user hovers over a button */
-.btn:hover, .dbs-action:hover {
+.btn:hover, .dbs-action:hover, .main-link:hover {
     transform: scale(1.08);
     filter: invert(100%);
     border-radius: 12px;
@@ -122,10 +118,6 @@ tr:nth-child(odd) {
 
 .flow-text {
     padding-left: 2vw;
-}
-
-#common_name {
-    text-transform: capitalize;
 }
 
 /* Used to hide show and edit buttons from non-logged-in users */

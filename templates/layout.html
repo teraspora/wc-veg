@@ -23,25 +23,25 @@
       <!-- navbar -->
     <div class="container">
       <header class = "brown darken-4">
-        <nav class="nav-wrapper transparent ">
-          <div class="container">
-            <a href="#" class="brand-logo lime-text text-accent-1">
-              <h1 class="left site-name">West Cork Veg</h1>
+        <nav class = "brown darken-4">
+          <div class="nav-wrapper transparent">
+            <a href="#" class="brand-logo">
+              <p class="orange-text text-accent-3 left site-name">West Cork Veg</p>
             </a>
-            <a href="#" class="sidenav-trigger" data-target="mobile-menu">
+            <a href="#" class="sidenav-trigger" data-target="nav-mobile">
               <i class="material-icons">menu</i>
             </a>
             <ul class="right hide-on-med-and-down">
-              <li><a class="lime-text text-accent-1 right" href = {{ url_for('veg') }}><h2 class="main-link">Browse Veg</h2> </a></li>
-              <li><a class="lime-text text-accent-1 right" href = {{ url_for('addveg') }}><h2 class="main-link">Add Info</h2> </a></li>
-              <li><a class="lime-text text-accent-1 right" href = {{ url_for('about') }}><h2 class="main-link">About</h2> </a></li>
-              <li><a class="lime-text text-accent-1 {{ '' if anon else 'logged-in' }}" right" href = {{ url_for('login') }}><h2 class="main-link">{{ 'Login' if anon else 'Logout' }}</h2> </a></li>
+              <li><a class="orange-text text-accent-3 right" href = {{ url_for('veg') }}><h2 class="main-link">Browse Veg</h2> </a></li>
+              <li><a class="orange-text text-accent-3 right" href = {{ url_for('addveg') }}><h2 class="main-link">Add Info</h2> </a></li>
+              <li><a class="orange-text text-accent-3 right" href = {{ url_for('about') }}><h2 class="main-link">About</h2> </a></li>
+              <li><a class="orange-text text-accent-3 {{ '' if anon else 'logged-in' }}" right" href = {{ url_for('login') }}><h2 class="main-link">{{ 'Login' if anon else 'Logout' }}</h2> </a></li>
             </ul>
-            <ul class="sidenav grey lighten-2" id="mobile-menu">
-              <li><a class="lime-text text-accent-1" href = {{ url_for('veg') }}><h2 class="main-link">Browse Veg</h2> </a></li>
-              <li><a class="lime-text text-accent-1" href = {{ url_for('addveg') }}><h2 class="main-link">Add Info</h2> </a></li>
-              <li><a class="lime-text text-accent-1" href = {{ url_for('about') }}><h2 class="main-link">About</h2> </a></li>
-              <li><a class="lime-text text-accent-1 {{ '' if anon else 'logged-in' }}" href = {{ url_for('login') }}><h2 class="main-link">{{ 'Login' if anon else 'Logout' }}</h2> </a></li>
+            <ul class="sidenav brown darken-4" id="nav-mobile">
+              <li><a class="yellow-text text-lighten-5" href = {{ url_for('veg') }}><h2 class="main-link">Browse Veg</h2> </a></li>
+              <li><a class="yellow-text text-lighten-5" href = {{ url_for('addveg') }}><h2 class="main-link">Add Info</h2> </a></li>
+              <li><a class="yellow-text text-lighten-5" href = {{ url_for('about') }}><h2 class="main-link">About</h2> </a></li>
+              <li><a class="yellow-text text-lighten-5 {{ '' if anon else 'logged-in' }}" href = {{ url_for('login') }}><h2 class="main-link">{{ 'Login' if anon else 'Logout' }}</h2> </a></li>
             </ul>
           </div>
         </nav>
