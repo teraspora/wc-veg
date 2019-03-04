@@ -28,6 +28,13 @@
         <h5> {{ veg.common_name.capitalize() }}: {{ veg.genus.capitalize() }} {{ veg.species }} </h5>
         <h6> Other names: {{ veg.other_names }} </h6>
         <p> {{ veg.description }} </p>
+        <a href = "{{url_for('editveg', veg_id = veg._id)}}" class = "
+          {% if anon %}
+            'hide '
+          {% else %}
+            ' '
+          {% endif %}
+          btn-floating right btn-large waves-effect waves-light cyan accent-4"><i class="material-icons right">edit</i>Edit</a>
     </div>
     <div id="grow-notes">
         <h5> Growing notes for {{ veg.common_name }}:</h5>
