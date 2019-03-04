@@ -210,6 +210,7 @@ def showveg(veg_id):
     elif os.path.isfile(image_path + '.png'):
         ext = '.png'
     else:
+        ext = ''
         image_path = ''
     print(f'\n***********\nFinal image_path = {image_path}; Ext: {ext}\n***************\n)')
     return render_template("showveg.html", veg = veg, uname = user.name, ext = ext)
