@@ -2,14 +2,20 @@ import os
 from flask import Flask, request, render_template, redirect, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-import sys
+from werkzeug.utils import secure_filename
 
+import sys
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET", "12676506002A2822HOD940149670../")
 app.config["MONGO_DBNAME"] = "wc-veg"
 app.config["MONGO_URI"] = "mongodb://tsadm:MDBpw256!@ds163054.mlab.com:63054/wc-veg"
+            
+# app.config['UPLOAD_FOLDER'] = PHOTO_DIR
 
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+ROOT = os.path.realpath(os.path.dirname(__file__))
+            
 mongo = PyMongo(app)
 
 # Keep a list of known users
@@ -30,8 +36,14 @@ class User:
 # ********* ABOVE NOT NEEDED FOR NATIVE FUNCTIONS AND METHODS ***********
 # ********* REMOVE THESE COMMENTS BEFORE PRODUCTION DEPLOYMENT **********
 
+def get_normalised_extension(filename_string):
+    ext = filename_string.rsplit('.',1)[1].lower()
+    return 'jpg' if ext == 'jpeg' else ext
 
-
+# Copied from http://flask.pocoo.org/docs/1.0/patterns/fileuploads/ and refactored:
+def allowed_file(filename):
+    """ Check if image filename valid """
+    return '.' in filename and get_normalised_extension(filename) in ALLOWED_EXTENSIONS
 
 @app.route("/about")
 def about():
@@ -119,13 +131,21 @@ def insertveg():
     if userid is None:
         return redirect(url_for("login"))
     user = users[userid]
-    form_data = request.form.to_dict()
+    new_veg = request.form.to_dict()
+    # ********* DEBUGGING: ***********
+    print(f'New Veg: {new_veg}')
     veg_list = mongo.db.vegetables
     # Only add if not already in collection
-    if veg_list.count_documents({"common_name": form_data["common_name"]}) == 0:
-        form_data = {k: v.capitalize() if k == 'genus' or k == 'common_name' else v.lower() if k == 'species' 
-        else v for k, v in form_data.items()}
-        veg_list.insert_one(form_data)
+    if veg_list.count_documents({"common_name": new_veg["common_name"]}) == 0:
+        # Capitalise common_name & genus; make species lowercase: 
+        new_veg = {k: v.capitalize() if k == 'genus' or k == 'common_name' else v.lower() if k == 'species' 
+        else v for k, v in new_veg.items()}
+        print(f'Request.files:{request.files}')
+        img = request.files['file']
+        if not img.filename == '':
+            filepath = os.path.join(ROOT, 'static', f'images/{new_veg["common_name"].lower()}.{get_normalised_extension(img.filename)}')
+            img.save(filepath)
+        veg_list.insert_one(new_veg)
     else:
         # for debugging; change!
         print("Will not insert duplicate of veg already in list of vegetables!")
@@ -180,7 +200,19 @@ def showveg(veg_id):
         return redirect(url_for("index"))
     user = users[userid]
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
-    return render_template("showveg.html", veg = veg, uname = user.name)
+    # ********* DEBUGGING: ***********
+    print(f'****************\n*** Veg:  {veg}')
+    # image_path = os.path.join(url_for('static'), f'images/{veg["common_name"].lower()}')
+    image_path = os.path.join("static", "images", veg["common_name"].lower())
+    print(f'image_path = {image_path}')
+    if os.path.isfile(image_path + '.jpg'):
+        ext = '.jpg'
+    elif os.path.isfile(image_path + '.png'):
+        ext = '.png'
+    else:
+        image_path = ''
+    print(f'\n***********\nFinal image_path = {image_path}; Ext: {ext}\n***************\n)')
+    return render_template("showveg.html", veg = veg, uname = user.name, ext = ext)
     
 
 if __name__ == "__main__":

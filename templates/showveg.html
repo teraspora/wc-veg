@@ -14,7 +14,7 @@
 
 <div class="card">
   <div class="center card-content">
-    <img src="{{ url_for('static', filename='images/' + veg.common_name + '.jpg') }}" alt="Photo of {{ veg.common_name.capitalize() }}">
+    <img src="{{ url_for('static', filename='images/' + veg.common_name.lower() + ext) }}" alt="Photo of {{ veg.common_name.capitalize() }}">
   </div>
   <div class="card-tabs">
     <ul class="tabs tabs-fixed-width">
