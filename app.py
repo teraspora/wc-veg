@@ -123,11 +123,14 @@ def insertveg():
     veg_list = mongo.db.vegetables
     # Only add if not already in collection
     if veg_list.count_documents({"common_name": form_data["common_name"]}) == 0:
+        form_data = {k: v.capitalize() if k == 'genus' or k == 'common_name' else v.lower() if k == 'species' 
+        else v for k, v in form_data.items()}
         veg_list.insert_one(form_data)
     else:
         # for debugging; change!
         print("Will not insert duplicate of veg already in list of vegetables!")
-    return redirect(url_for("veg", veg = mongo.db.vegetables.find(), uname = user.name))
+    veg = mongo.db.vegetables.find()
+    return redirect(url_for("veg", veg = veg, uname = user.name))
 
 @app.route("/editveg/<veg_id>")
 def editveg(veg_id):
@@ -149,8 +152,8 @@ def updateveg(veg_id):
     user = users[userid]
     veg_list = mongo.db.vegetables
     veg_list.update({'_id': ObjectId(veg_id)}, {'$set':{
-            "genus": request.form.get("genus"),
-            "species" : request.form.get("species"),
+            "genus": request.form.get("genus".capitalize()),
+            "species" : request.form.get("species".lower()),
             "category_name": request.form.get("category_name"),
             "other_names" : request.form.get("other_names"),
             "description" : request.form.get("description"),
