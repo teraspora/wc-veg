@@ -10,9 +10,9 @@
 {% endblock %}
 
 {% block content %}
-   <h5>Create a new vegetable entry (Name, genus & species must be > 2 letters)...</h5>
+   <h5>Create a new vegetable entry <!-- s -->...</h5>
 <div class="row">
-    <form action="/insertveg" method="POST" class="col s12">
+    <form action="/insertveg" method="POST" class="col s12" enctype = "multipart/form-data">>
         <input type="hidden" name="form_id" value="addveg">
     <div class="row">
             <div class="row">
@@ -29,7 +29,7 @@
             </div>
             <div class="input-field col s12">
                 <i class="material-icons prefix">grade</i>
-                <input id="common_name" name="common_name" type="text" pattern="[A-Za-z]{3,}" required>
+                <input id="common_name" name="common_name" type="text" pattern="[A-Za-z\s]{3,}" required>
                 <label for="common_name">Veg Name</label>
             </div>
             <div class="input-field col s12">
@@ -68,6 +68,13 @@
                 <i class="material-icons prefix">subject</i>
                 <textarea name="cook_notes" id="cook_notes" class="materialize-textarea"></textarea>
                 <label for="cook_notes">Cooking Notes</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">add_a_photo</i>
+                <input name="file" id="file" type="file"
+                <label for="file">Upload a photograph</label>
             </div>
         </div>
         <button class="btn black-text green accent-4 waves-effect waves-light" type="submit" name="add">Add to Database
