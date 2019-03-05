@@ -45,6 +45,15 @@ def allowed_file(filename):
     """ Check if image filename valid """
     return '.' in filename and get_normalised_extension(filename) in ALLOWED_EXTENSIONS
 
+@app.route("/")
+@app.route("/login")
+def login():
+    """ Display the login dialogue. """
+    session.pop('userid', None)
+    userid = -1;
+    anon = True;
+    return render_template("login.html", anon = anon)
+
 @app.route("/about")
 def about():
     """ Show info about the site. """
@@ -103,16 +112,6 @@ def sortveg(sort_field):
     print(f'Anon is {anon} (in sortveg())')
     
     return render_template("veg.html", veg = veg, anon = anon, uname = user.name)
-
-
-@app.route("/")
-@app.route("/login")
-def login():
-    """ Display the login dialogue. """
-    session.pop('userid', None)
-    userid = -1;
-    anon = True;
-    return render_template("login.html", anon = anon)
 
 @app.route("/addveg")
 def addveg():
