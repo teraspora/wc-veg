@@ -52,23 +52,30 @@ def login():
     session.pop('userid', None)
     userid = -1;
     anon = True;
-    return render_template("login.html", anon = anon)
+    return render_template("login.html")
 
 @app.route("/about")
 def about():
     """ Show info about the site. """
     userid = session.get("userid", None)
-    user = users[userid]
-    return render_template("about.html", uname = user.name)
+    if userid is None:
+        anon = True
+        user = User('anon', False)
+    else:
+        anon = False
+        user = users[userid]
+    # ********* DEBUGGING: ***********
+    print(f'User is {user.name}, userid = {userid}')
+    return render_template("about.html", uname = user.name, anon = anon)
 
 @app.route("/veg", methods = ["GET", "POST"])
 def veg():
-    """ Show a table of all veg in database. """   
+    """ Register user / Show a table of all veg in database. """   
     if request.method == "POST" and request.form["form_id"] == "login":
         uname = request.form["uname"]
         userid = next((i for i, user in enumerate(users) if user.name == uname), -1)
         
-        if userid == -1:    # so it's a new user
+        if userid < 0:    # so it's a new user
             userid = len(users)
             user = User(uname, True if uname == "John" else False)
             users.append(user)
@@ -117,7 +124,7 @@ def sortveg(sort_field):
 def addveg():
     """ Render a form to allow user to add a new veg to database. """
     userid = session.get("userid", None)
-    if userid is None or userid == -1:
+    if userid is None or userid < 0:
         return redirect(url_for("login"))
     user = users[userid]
     
@@ -149,13 +156,13 @@ def insertveg():
         # for debugging; change!
         print("Will not insert duplicate of veg already in list of vegetables!")
     veg = mongo.db.vegetables.find()
-    return redirect(url_for("veg", veg = veg, uname = user.name))
+    return redirect(url_for("veg"))
 
 @app.route("/editveg/<veg_id>")
 def editveg(veg_id):
     """ Render a form to allow user to edit a veg. """
     userid = session.get("userid", None)
-    if userid is None or userid == -1:
+    if userid is None or userid < 0:
         return redirect(url_for("index"))
     user = users[userid]
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
@@ -166,7 +173,7 @@ def editveg(veg_id):
 def updateveg(veg_id):
     """ Insert the amended document into database and then show the updated veg table. """
     userid = session.get("userid", None)
-    if userid is None or userid == -1:
+    if userid is None or userid < 0:
         return redirect(url_for("index"))
     user = users[userid]
     veg_list = mongo.db.vegetables
@@ -179,7 +186,7 @@ def updateveg(veg_id):
             "grow_notes" : request.form.get("grow_notes"),
             "cook_notes" : request.form.get("cook_notes")        
         }})
-    return redirect(url_for("veg", uname = user.name))
+    return redirect(url_for("veg"))
 
 @app.route("/deleteveg/<veg_id>")
 def deleteveg(veg_id):
@@ -189,30 +196,33 @@ def deleteveg(veg_id):
         return redirect(url_for("index"))
     user = users[userid]
     mongo.db.vegetables.remove({"_id": ObjectId(veg_id)})
-    return redirect(url_for("veg", uname = user.name))
+    return redirect(url_for("veg"))
 
 @app.route("/showveg/<veg_id>")
 def showveg(veg_id):
     """ Show details for an individual veg. """
     userid = session.get("userid", None)
     if userid is None or userid == -1:
-        return redirect(url_for("index"))
-    user = users[userid]
+        anon = True
+        user = User('anon', False)
+    else:
+        anon = False
+        user = users[userid]
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
     # ********* DEBUGGING: ***********
     print(f'****************\n*** Veg:  {veg}')
     # image_path = os.path.join(url_for('static'), f'images/{veg["common_name"].lower()}')
     image_path = os.path.join("static", "images", veg["common_name"].lower())
-    print(f'image_path = {image_path}')
+    # print(f'image_path = {image_path}')
     if os.path.isfile(image_path + '.jpg'):
         ext = '.jpg'
     elif os.path.isfile(image_path + '.png'):
         ext = '.png'
     else:
         ext = ''
-        image_path = ''
+        # image_path = ''
     print(f'\n***********\nFinal image_path = {image_path}; Ext: {ext}\n***************\n)')
-    return render_template("showveg.html", veg = veg, uname = user.name, ext = ext)
+    return render_template("showveg.html", veg = veg, uname = user.name, ext = ext, anon = anon)
     
 
 if __name__ == "__main__":
