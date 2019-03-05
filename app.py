@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, redirect, url_for, session
+from flask import Flask, request, render_template, redirect, url_for, session, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.utils import secure_filename
@@ -37,6 +37,9 @@ class User:
 # ********* REMOVE THESE COMMENTS BEFORE PRODUCTION DEPLOYMENT **********
 
 def get_normalised_extension(filename_string):
+    """ Return the substring after the dot in a filename, 
+    converted to lowercase and with .jpeg changed to .jpg
+    """
     ext = filename_string.rsplit('.',1)[1].lower()
     return 'jpg' if ext == 'jpeg' else ext
 
@@ -65,7 +68,7 @@ def login():
 def about():
     """ Show info about the site. """
     userid = session.get("userid", None)
-    if userid is None:
+    if userid is None or userid < 0:
         anon = True
         user = User('anon', False)
     else:
@@ -84,8 +87,9 @@ def veg():
         
         if userid < 0:    # so it's a new user
             userid = len(users)
-            user = User(uname, True if uname == "John" else False)
+            user = User(uname, True if uname == "John" else False)  # last param True sets admin perms
             users.append(user)
+            flash(f'You\'re logged in to West Cork Veg as { uname.capitalize() }.')
         else:               # so we already know this user
             user = users[userid]
             
@@ -147,20 +151,22 @@ def insertveg():
     new_veg = request.form.to_dict()
     # Add a 'creator' field with the user's name
     new_veg['creator'] = user.name
+    vname = new_veg["common_name"]
     # ********* DEBUGGING: ***********
     print(f'New Veg: {new_veg}')
     veg_list = mongo.db.vegetables
     # Only add if not already in collection
-    if veg_list.count_documents({"common_name": new_veg["common_name"]}) == 0:
+    if veg_list.count_documents({"common_name": vname}) == 0:
         # Capitalise common_name & genus; make species lowercase: 
         new_veg = {k: v.capitalize() if k == 'genus' or k == 'common_name' else v.lower() if k == 'species' 
-        else v for k, v in new_veg.items()}
+                else v for k, v in new_veg.items()}
         print(f'Request.files:{request.files}')
         img = request.files['file']
         if not img.filename == '':
             filepath = os.path.join(ROOT, 'static', f'images/{new_veg["common_name"].lower()}.{get_normalised_extension(img.filename)}')
             img.save(filepath)
         veg_list.insert_one(new_veg)
+        flash(f'{ vname.capitalize() } added to database.')
     else:
         # for debugging; change!
         print("Will not insert duplicate of veg already in list of vegetables!")
@@ -185,6 +191,7 @@ def updateveg(veg_id):
         return redirect(url_for("index"))
     user = users[userid]
     veg_list = mongo.db.vegetables
+    vname = veg_list.find_one({'_id': ObjectId(veg_id)})["common_name"]
     veg_list.update({'_id': ObjectId(veg_id)}, {'$set':{
             "genus": request.form.get("genus").capitalize(),
             "species" : request.form.get("species").lower(),
@@ -194,6 +201,7 @@ def updateveg(veg_id):
             "grow_notes" : request.form.get("grow_notes"),
             "cook_notes" : request.form.get("cook_notes")        
         }})
+    flash(f'{ vname.capitalize() } updated in database.')
     return redirect(url_for("veg"))
 
 @app.route("/deleteveg/<veg_id>")
@@ -203,7 +211,10 @@ def deleteveg(veg_id):
     if userid is None or userid == -1:
         return redirect(url_for("index"))
     user = users[userid]
-    mongo.db.vegetables.remove({"_id": ObjectId(veg_id)})
+    veg_list = mongo.db.vegetables
+    vname = veg_list.find_one({'_id': ObjectId(veg_id)})["common_name"]
+    veg_list.remove({"_id": ObjectId(veg_id)})
+    flash(f'{ vname.capitalize() } deleted from database.')
     return redirect(url_for("veg"))
 
 @app.route("/showveg/<veg_id>")

@@ -126,3 +126,14 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+/*for flashed messages*/
+
+.flash-msgs {
+    height: 5vh;
+}
+
+.flashes  li {
+    font-size: 1.2vw;
+    padding-left: 1vw;
+}

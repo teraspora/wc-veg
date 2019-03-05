@@ -20,7 +20,7 @@
   </head>
 
   <body>
-      <!-- navbar -->
+    <!-- navbar -->
     <div class="container">
       <header class = "brown darken-4">
         <nav class = "brown darken-4">
@@ -45,6 +45,18 @@
           <li><a class="white-text" href = {{ url_for('about') }}><h2 class="main-link">About</h2> </a></li>
           <li><a class="white-text {{ '' if anon else 'logged-in' }}" href = {{ url_for('login') }}><h2 class="main-link">{{ 'Login' if anon else 'Logout' }}</h2> </a></li>
         </ul>
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <br>
+              <div class="flash-msgs">
+                <ul class="flashes">
+                  {% for message in messages %}
+                    <li class = "cyan-text text-accent-4">{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          {% endwith %}
       </header>
         
       <main class="main">
