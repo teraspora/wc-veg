@@ -161,15 +161,17 @@ def insertveg():
         new_veg = {k: v.capitalize() if k == 'genus' or k == 'common_name' else v.lower() if k == 'species' 
                 else v for k, v in new_veg.items()}
         print(f'Request.files:{request.files}')
-        img = request.files['file']
-        if not img.filename == '':
+        try:
+            img = request.files['file']
             filepath = os.path.join(ROOT, 'static', f'images/{new_veg["common_name"].lower()}.{get_normalised_extension(img.filename)}')
             img.save(filepath)
+        except:
+            pass
         veg_list.insert_one(new_veg)
         flash(f'{ vname.capitalize() } added to database.')
     else:
-        # for debugging; change!
-        print("Will not insert duplicate of veg already in list of vegetables!")
+        # if user has tried to create duplicate entry
+        flash(f'{ vname.capitalize() } is already in the database.')
     return redirect(url_for("veg"))
 
 @app.route("/editveg/<veg_id>")
