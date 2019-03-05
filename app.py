@@ -22,7 +22,7 @@ mongo = PyMongo(app)
 users = [] 
 userid = -1
 anon = True     # means no user logged in so edit/delete not available
-sort_fields = ["common_name", "genus", "species", "category_name"]
+sort_fields = ["common_name", "genus", "species", "category_name", "creator"]
 
 class User:
     """ Represents a user and associated data """
@@ -138,6 +138,8 @@ def insertveg():
         return redirect(url_for("login"))
     user = users[userid]
     new_veg = request.form.to_dict()
+    # Add a 'creator' field with the user's name
+    new_veg['creator'] = user.name
     # ********* DEBUGGING: ***********
     print(f'New Veg: {new_veg}')
     veg_list = mongo.db.vegetables
@@ -155,7 +157,6 @@ def insertveg():
     else:
         # for debugging; change!
         print("Will not insert duplicate of veg already in list of vegetables!")
-    veg = mongo.db.vegetables.find()
     return redirect(url_for("veg"))
 
 @app.route("/editveg/<veg_id>")

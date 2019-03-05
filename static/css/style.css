@@ -48,16 +48,16 @@ header * {
     border: 3px ridge black;
 }
 
-.genus, .common_name, .species, .category_name {
+.genus, .common_name, .species, .category_name, #common_name, .creator {
     font-size: 1.2vw;
 }
 
-.genus, .common_name, #common_name {
+.genus, .common_name, #common_name, .creator {
     text-transform: capitalize;
 }
 
 @media only screen and (max-width: 1024px) {
-   .genus, .common_name, .species, .category_name, #common_name {
+   .genus, .common_name, .species, .category_name, #common_name, .creator {
         font-size: 2.2vw;
    } 
 }

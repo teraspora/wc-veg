@@ -28,6 +28,7 @@
             <td class = "field-name genus"> <a href = {{ url_for('sortveg', sort_field = 'genus') }}>Genus</a> </td>
             <td class = "field-name species"> <a href = {{ url_for('sortveg', sort_field = 'species') }}>Species</a> </td>
             <td class = "field-name category_name"> <a href = {{ url_for('sortveg', sort_field = 'category_name') }}>Category</a> </td>
+            <td class = "field-name creator"> <a href = {{ url_for('sortveg', sort_field = 'creator') }}>Creator</a> </td>
         </tr>
         {% for v in veg %}
          <tr>
@@ -35,6 +36,7 @@
             <td class = "genus"> {{ v.genus }} </td>
             <td class = "species"> {{ v.species }} </td>
             <td class = "category_name"> {{ v.category_name }} </td>
+            <td class = "creator"> {{ v.creator }} </td>
             <td class="show">
               <a href = "{{url_for("showveg", veg_id = v._id)}}" class="dbs-action text-bold black-text green accent-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
             </td>
