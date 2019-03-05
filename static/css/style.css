@@ -52,7 +52,7 @@ header * {
     font-size: 1.2vw;
 }
 
-.genus, .common_name, #common_name, #genus, , #category_name, .creator, #creator {
+.genus, .common_name, #common_name, .category_name, #genus, #category_name, .creator, #creator {
     text-transform: capitalize;
 }
 
@@ -64,10 +64,6 @@ header * {
 
 .category_name {
     font-style: italic;
-}
-
-.field-name {
-    font-weight: bold;
 }
 
 .welcome {
@@ -104,7 +100,7 @@ header * {
     border: 8px ridge gold;    
 }
 
-.text-bold {
+.text-bold, .field-name, .category_name {
     font-weight: bold;
 }
 /* Make alternate rows different shades */
