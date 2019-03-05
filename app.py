@@ -153,17 +153,19 @@ def insertveg():
     new_veg['creator'] = user.name
     vname = new_veg["common_name"]
     # ********* DEBUGGING: ***********
-    print(f'New Veg: {new_veg}')
+    print(f'\n********\n\n*** IN INSERTVEG():  ***   New Veg: {new_veg}')
     veg_list = mongo.db.vegetables
     # Only add if not already in collection
     if veg_list.count_documents({"common_name": vname}) == 0:
         # Capitalise common_name & genus; make species lowercase: 
         new_veg = {k: v.capitalize() if k == 'genus' or k == 'common_name' else v.lower() if k == 'species' 
                 else v for k, v in new_veg.items()}
-        print(f'Request.files:{request.files}')
+        print(f'\n********\n\n*** IN INSERTVEG():  ***   Request.files:{request.files.to_dict()}')
         try:
             img = request.files['file']
+            print(f'\n********\n\n*** IN INSERTVEG():  ***   img = {img}')
             filepath = os.path.join(ROOT, 'static', f'images/{new_veg["common_name"].lower()}.{get_normalised_extension(img.filename)}')
+            print(f'\n********\n\n*** IN INSERTVEG():  ***   \n***********\n\nFilepath = { filepath }.\n\n***************\n)')
             img.save(filepath)
         except:
             pass
@@ -203,6 +205,16 @@ def updateveg(veg_id):
             "grow_notes" : request.form.get("grow_notes"),
             "cook_notes" : request.form.get("cook_notes")        
         }})
+    print(f'\n********\n\n\n *** IN UPDATEVEG():  ***   Request.files:{request.files.to_dict()}')
+    try:
+        img = request.files['file']
+        # ************************************** DEBUGGING ****************************************************
+        print(f'\n********\n\n\n *** IN UPDATEVEG():  ***   img = {img}')
+        filepath = os.path.join(ROOT, 'static', f'images/{vname.lower()}.{get_normalised_extension(img.filename)}')
+        print(f'\n********\n\n\n *** IN UPDATEVEG():  ***   \n***********\n\nFilepath = { filepath }.\n\n***************\n)')
+        img.save(filepath)
+    except:
+        pass
     flash(f'{ vname.capitalize() } updated in database.')
     return redirect(url_for("veg"))
 
@@ -234,7 +246,7 @@ def showveg(veg_id):
     print(f'****************\n*** Veg:  {veg}')
     # image_path = os.path.join(url_for('static'), f'images/{veg["common_name"].lower()}')
     image_path = os.path.join("static", "images", veg["common_name"].lower())
-    # print(f'image_path = {image_path}')
+    print(f'\n***********\n\nFilepath of photo = { image_path } (without extension).\n\n***************\n)')
     if os.path.isfile(image_path + '.jpg'):
         ext = '.jpg'
     elif os.path.isfile(image_path + '.png'):
