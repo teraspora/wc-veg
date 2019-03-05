@@ -12,7 +12,7 @@
 {% block content %}
     <section class="welcome">
       <h4>
-        Hello {{ uname }}, welcome to West Cork Veg!
+        Hello {{ "friend" if anon else uname.title() }}, welcome to West Cork Veg!
         Check out the vegetables you can grow in West Cork!
       </h4>
   
