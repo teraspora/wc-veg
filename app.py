@@ -172,8 +172,8 @@ def updateveg(veg_id):
     user = users[userid]
     veg_list = mongo.db.vegetables
     veg_list.update({'_id': ObjectId(veg_id)}, {'$set':{
-            "genus": request.form.get("genus".capitalize()),
-            "species" : request.form.get("species".lower()),
+            "genus": request.form.get("genus").capitalize(),
+            "species" : request.form.get("species").lower(),
             "category_name": request.form.get("category_name"),
             "other_names" : request.form.get("other_names"),
             "description" : request.form.get("description"),
