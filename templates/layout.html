@@ -33,7 +33,7 @@
             </a>
             <ul class="right hide-on-med-and-down">
               <li><a class="orange-text text-accent-3 right" href = {{ url_for('veg') }}><h2 class="main-link">Browse Veg</h2> </a></li>
-              <li><a class="orange-text text-accent-3 right" href = {{ url_for('addveg') }}><h2 class="main-link">Add Veg</h2> </a></li>
+              <li><a class="orange-text text-accent-3 right" href = {{ url_for('addveg') }}><h2 class="main-link {{ 'hide' if anon else ''}}">Add Veg</h2> </a></li>
               <li><a class="orange-text text-accent-3 right" href = {{ url_for('about') }}><h2 class="main-link">About</h2> </a></li>
               <li><a class="orange-text text-accent-3 {{ '' if anon else 'logged-in' }}" right" href = {{ url_for('login') }}><h2 class="main-link">{{ 'Login' if anon else 'Logout' }}</h2> </a></li>
             </ul>
