@@ -45,6 +45,13 @@ def allowed_file(filename):
     """ Check if image filename valid """
     return '.' in filename and get_normalised_extension(filename) in ALLOWED_EXTENSIONS
 
+# @app.route("/addcreator")
+# def addcreator():
+#     """  Purely for development """
+#     mongo.db.vegetables.update_many({}, {'$set':{"creator": "WCGardener"}})
+#     print("\n********** \n\n UPDATE DONE! \n\n**********\n")
+#     return redirect(url_for("veg", veg = mongo.db.vegetables.find(), anon = anon))
+
 @app.route("/")
 @app.route("/login")
 def login():

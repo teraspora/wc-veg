@@ -36,7 +36,7 @@
             <td class = "genus"> {{ v.genus }} </td>
             <td class = "species"> {{ v.species }} </td>
             <td class = "category_name"> {{ v.category_name }} </td>
-            <td class = "creator"> {{ v.creator }} </td>
+            <td class = "creator"> {{ v.creator.capitalize() }} </td>
             <td class="show">
               <a href = "{{url_for("showveg", veg_id = v._id)}}" class="dbs-action text-bold black-text green accent-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
             </td>
