@@ -11,8 +11,6 @@ app.secret_key = os.getenv("SECRET", "12676506002A2822HOD940149670../")
 app.config["MONGO_DBNAME"] = "wc-veg"
 app.config["MONGO_URI"] = "mongodb://tsadm:MDBpw256!@ds163054.mlab.com:63054/wc-veg"
             
-# app.config['UPLOAD_FOLDER'] = PHOTO_DIR
-
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 ROOT = os.path.realpath(os.path.dirname(__file__))
             
@@ -75,9 +73,17 @@ def about():
     else:
         anon = False
         user = users[userid]
+
+    veg_list = mongo.db.vegetables
+    num_vegs = veg_list.count_documents({})
+    num_genera = len(veg_list.distinct("genus"))
+    num_categories = 7
+    num_creators = len(veg_list.distinct("creator"))
+        
     # ********* DEBUGGING: ***********
     print(f'User is {user.name}, userid = {userid}')
-    return render_template("about.html", uname = user.name, anon = anon)
+    return render_template("about.html", uname = user.name, anon = anon, num_vegs = num_vegs,
+        num_genera = num_genera, num_categories = num_categories, num_creators = num_creators)
 
 @app.route("/veg", methods = ["GET", "POST"])
 def veg():

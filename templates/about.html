@@ -23,6 +23,13 @@
       <p class="flow-text">
         Click one of the links above to get started with West Cork Veg!
       </p>
+      <p class="flow-text">
+        We currently have {{ num_vegs }} entries in the veg database, belonging to {{ num_genera }} genera. They are classified into {{ num_categories }} categories and were created by {{ num_creators }} distinct contributors.
+      </p>
+      <p class="flow-text">
+        tl;dr:  It was designed, built and debugged by John Lynch using Python/Flask and MongoDB, database hosted by Mlab, website styled using Materialize, app deployed to Heroku.
+        It will continue to be developed by me and will soon feature secure user registration and multiple photos per veg. 
+      </p>
     </section>
 
 {% endblock %}
