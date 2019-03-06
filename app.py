@@ -9,7 +9,7 @@ import sys
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET")
 app.config["MONGO_DBNAME"] = "wc-veg"
-app.config["MONGO_URI"] # = "mongodb://tsadm:MDBpw256!@ds163054.mlab.com:63054/wc-veg"
+app.config["MONGO_URI"] = "MONGO_URI"
             
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 ROOT = os.path.realpath(os.path.dirname(__file__))
