@@ -9,12 +9,11 @@ import sys
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET")
 app.config["MONGO_DBNAME"] = "wc-veg"
-app.config["MONGO_URI"] = "MONGO_URI"
             
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 ROOT = os.path.realpath(os.path.dirname(__file__))
             
-mongo = PyMongo(app)
+mongo = PyMongo(app, uri = os.getenv(MONGO_URI))
 
 # Keep a list of known users
 users = [] 
