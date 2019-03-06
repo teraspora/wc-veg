@@ -23,6 +23,7 @@ users = []
 userid = -1
 anon = True     # means no user logged in so edit/delete not available
 sort_fields = ["common_name", "genus", "species", "category_name", "creator"]
+filter_fields = ["genus", "category_name", "creator"]
 
 class User:
     """ Represents a user and associated data """
@@ -128,6 +129,29 @@ def sortveg(sort_field):
         print(f'User is {user.name}, userid = {userid}')
     # ********* DEBUGGING: ***********
     print(f'Anon is {anon} (in sortveg())')
+    
+    return render_template("veg.html", veg = veg, anon = anon, uname = user.name)
+
+@app.route("/filterveg/<string:filter_field>/<string:value>")
+def filterveg(filter_field, value):
+    # ********* DEBUGGING: ***********
+    print(f'filter_field = {filter_field}')
+    if filter_field not in filter_fields:
+        veg = mongo.db.vegetables.find()
+    else:
+        veg = mongo.db.vegetables.find({filter_field: value})
+        flash(f'Showing entries with {filter_field}:  {value}.')
+
+    userid = session.get("userid", None)
+    if userid is None or userid < 0:
+        anon = True
+        user = User('anon', False)
+    else:
+        anon = False
+        user = users[userid]
+        print(f'User is {user.name}, userid = {userid}')
+    # ********* DEBUGGING: ***********
+    print(f'Anon is {anon} (in filterveg())')
     
     return render_template("veg.html", veg = veg, anon = anon, uname = user.name)
 

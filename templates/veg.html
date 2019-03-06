@@ -18,7 +18,7 @@
       <h4 class = "right">
         Check out the vegetables you can grow in West Cork!
       </h4>
-      <h5 class = "right">Click on a column header to sort by that column.</h5>
+      <h5 class = "right">Click on a column header to sort by that column.   You can filter by genus, category or creator, e.g. click 'Allium' to show only Alliums.</h5>
     </section>
     <section class="section veg-list">
 
@@ -33,10 +33,10 @@
         {% for v in veg %}
          <tr>
             <th class = "common_name"> {{ v.common_name }} </th>
-            <td class = "genus"> {{ v.genus }} </td>
+            <td class = "filterable genus"><a href = {{ url_for('filterveg', filter_field = 'genus', value = v.genus) }}> {{ v.genus.capitalize() }} </a> </td>
             <td class = "species"> {{ v.species }} </td>
-            <td class = "category_name"> {{ v.category_name }} </td>
-            <td class = "creator"> {{ v.creator.capitalize() }} </td>
+            <td class = "filterable category_name"><a href = {{ url_for('filterveg', filter_field = 'category_name', value = v.category_name) }}> {{ v.category_name }} </a> </td>
+            <td class = "filterable creator"><a href = {{ url_for('filterveg', filter_field = 'creator', value = v.creator) }}> {{ v.creator.capitalize() }} </a> </td>
             <td class="show">
               <a href = "{{url_for("showveg", veg_id = v._id)}}" class="dbs-action text-bold black-text green accent-4 waves-effect waves-light btn-small"><i class="material-icons right">details</i>Show</a>
             </td>
@@ -53,3 +53,7 @@
     </section>
 
 {% endblock %}
+
+<td class = "genus"><a href = {{ url_for('filterveg', filter_field = 'genus') }}> {{ v.genus }} </a> </td>
+<td class = "category_name"><a href = {{ url_for('filterveg', filter_field = 'category_name') }}> {{ v.category_name }} </a> </td>
+<td class = "creator"><a href = {{ url_for('filterveg', filter_field = 'creator') }}> {{ v.creator }} </a> </td>
