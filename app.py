@@ -50,7 +50,7 @@ def login():
     session.pop('userid', None)
     userid = -1;
     anon = True;
-    return render_template("login.html")
+    return render_template("login.html", anon = True)
 
 @app.route("/about")
 def about():
