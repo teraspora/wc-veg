@@ -15,7 +15,7 @@
         Hello {{ "friend" if anon else uname.title() }}, welcome to West Cork Veg!
         Check out the vegetables you can grow in West Cork!
       </h4>
-  
+    </section>
     <section class="section veg-list">
       <p class="flow-text">
         This website is dedicated to maintaining a database to provide and share information about growing vegetables in West Cork, Ireland.   There are many great gardeners in West Cork, following the organic way, growing vegetables, trees, flowers, shrubs, mushrooms and probably more.   But this site is focused on vegetables in all their forms.   There are a number of different categories (such as leafy, root, bulb) into which vegetables are classified.   Links are provided to show or edit the information.   This is intended to be a community resource, so that West Cork vegetable gardeners can share tips and tricks for getting the best crops while working in harmony with nature.
@@ -26,10 +26,17 @@
       <p class="flow-text">
         We currently have {{ num_vegs }} entries in the veg database, belonging to {{ num_genera }} genera. They are classified into {{ num_categories }} categories and were created by {{ num_creators }} distinct contributors.
       </p>
-      <p class="flow-text">
-        tl;dr:  It was designed, built and debugged by John Lynch using Python/Flask and MongoDB, database hosted by Mlab, website styled using Materialize, app deployed to Heroku.
-        It will continue to be developed by me and will soon feature secure user registration and multiple photos per veg. 
-      </p>
+      <div class="card center">
+        <div class="col s12 m6">
+          <div class="card brown darken-4">
+            <div class="card-content white-text">
+              <p>
+                tl;dr: It was designed, built and debugged by John Lynch using Python/Flask and MongoDB, database hosted by Mlab, website styled using Materialize, app deployed to Heroku. It will continue to be developed by me and will soon feature secure user registration and multiple photos per veg.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
 {% endblock %}
