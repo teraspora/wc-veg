@@ -114,6 +114,7 @@ tr:nth-child(odd) {
 
 .flow-text {
     padding-left: 2vw;
+    padding-right: 2vw;
 }
 
 /* Used to hide show and edit buttons from non-logged-in users */
