@@ -58,8 +58,11 @@ header * {
 }
 
 @media only screen and (max-width: 1024px) {
-   .genus, .common_name, .species, .category_name, #common_name, #category_name, .creator, #creator {
+   .genus, .common_name, .species, #common_name {
         font-size: 2.2vw;
+   } 
+   .category_name, #category_name, .creator, #creator, .edit, .delete {
+        display: none;
    } 
 }
 
