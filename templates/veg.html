@@ -32,7 +32,7 @@
         </tr>
         {% for v in veg %}
          <!-- Modal dialog - should only display when triggered above -->
-         <div id="confirm-{{ v.common_name.capitalize() }}" class="modal orange accent-2">
+         <div id="confirm-{{ v.common_name }}" class="modal orange accent-2">
            <div class="modal-content">
              <h4>Do you really want to delete {{ v.common_name.capitalize() }}?</h4>
            </div>
