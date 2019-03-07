@@ -90,10 +90,15 @@ header * {
 }
 
 /* Provide feedback when user hovers over a button */
-.btn:hover, .dbs-action:hover, .main-link:hover {
+.btn:hover, .dbs-action:hover {
     transform: scale(1.08);
     filter: invert(100%);
     border-radius: 12px;
+}
+
+.main-link:hover {
+    transform: scale(1.08);
+    background: yellow;
 }
 
 .btn-login {

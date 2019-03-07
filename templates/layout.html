@@ -25,18 +25,18 @@
       <header class = "brown darken-4">
         <nav class = "brown darken-4">
           <div class="nav-wrapper transparent">
-            <a href="#!" class="brand-logo orange-text text-accent-3">
+            <a href="#!" class="brand-logo amber-text text-accent-3">
             <h2 class = "site-name">West Cork Veg</h2>
             </a>
             <a href="#" class="sidenav-trigger" data-target="mobile-demo">
               <i class="material-icons">menu</i>
             </a>
             <ul class="right hide-on-med-and-down">
-              <li><a class="orange-text text-accent-3 right" href = "{{ url_for('veg') }}"><h2 class="main-link">Browse Veg</h2> </a></li>
-              <li><a class="orange-text text-accent-3 right" href = "{{ url_for('addveg') }}"><h2 class="main-link {{ 'hide' if anon else ''}}">Add Veg</h2> </a></li>
-              <li><a class="orange-text text-accent-3 right" href = "{{ url_for('links') }}"><h2 class="main-link">Links</h2> </a></li>
-              <li><a class="orange-text text-accent-3 right" href = "{{ url_for('about') }}"><h2 class="main-link">About</h2> </a></li>
-              <li><a class="orange-text text-accent-3 {{ '' if anon else 'logged-in' }} right" href = "{{ url_for('login') }}"><h2 class="main-link">{{ 'Login' if anon else 'Logout' }}</h2> </a></li>
+              <li><a class="amber-text text-accent-3 right" href = "{{ url_for('veg') }}"><h2 class="main-link">Browse Veg</h2> </a></li>
+              <li><a class="amber-text text-accent-3 right" href = "{{ url_for('addveg') }}"><h2 class="main-link {{ 'hide' if anon else ''}}">Add Veg</h2> </a></li>
+              <li><a class="amber-text text-accent-3 right" href = "{{ url_for('links') }}"><h2 class="main-link">Links</h2> </a></li>
+              <li><a class="amber-text text-accent-3 right" href = "{{ url_for('about') }}"><h2 class="main-link">About</h2> </a></li>
+              <li><a class="amber-text text-accent-3 {{ '' if anon else 'logged-in' }} right" href = "{{ url_for('login') }}"><h2 class="main-link">{{ 'Login' if anon else 'Logout' }}</h2> </a></li>
             </ul>
           </div>
         </nav>
@@ -52,7 +52,7 @@
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <br>
-            <div class="flash-msgs card orange accent-2">
+            <div class="flash-msgs card amber accent-2">
               <ul class="flashes">
                 {% for message in messages %}
                   <li class = "black-text">{{ message }}</li>
