@@ -40,17 +40,19 @@ header * {
     margin-top: 5%;
 }
 
-/*.nav-wrapper {
-    min-height: 100px;
+@media only screen and (max-width: 1024px) {
+   .site-name {
+        font-size: 6vw;
+    }
 }
-*/
+
 .container {
     background: #f9fbe7;
     border: 3px ridge black;
 }
 
 .genus, .common_name, .species, .category_name, #common_name, #category_name, .creator, #creator {
-    font-size: 1.2vw;
+    font-size: 1.4vw;
 }
 
 .genus, .common_name, #common_name, .category_name, #genus, #category_name, .creator, #creator {
@@ -59,7 +61,7 @@ header * {
 
 @media only screen and (max-width: 1024px) {
    .genus, .common_name, .species, #common_name {
-        font-size: 2.2vw;
+        font-size: 3.8vw;
    } 
    .category_name, #category_name, .creator, #creator, .edit, .delete {
         display: none;
@@ -135,12 +137,20 @@ img {
 /*for flashed messages*/
 
 .flash-msgs {
-    height: 5vh;
+    height: 6vh;
+    width: 25%;
+    padding-bottom: 1vw;
 }
 
 .flashes  li {
     font-size: 1.2vw;
     padding-left: 1vw;
+}
+
+@media only screen and (max-width: 1024px) {
+    .flashes  li {
+        font-size: 3.2vw;
+    }
 }
 
 h5 {
@@ -163,9 +173,11 @@ td {
     padding: 0;
 }
 
+/* Hack to prevent links being unclickable; looks like a bug in Materialize to me... */
 .sidenav-overlay {
     z-index: 0;
 }
+
 
 .links {
     width: 50%;
@@ -182,6 +194,18 @@ td {
 
 .links p {
     font-size: 1.4vw;
+}
+
+@media only screen and (max-width: 1024px) {
+    .links a {
+        font-size: 4vw;
+    }
+    .links p {
+        font-size: 3vw;
+    }
+    .main-link {
+        font-size: 6vw;
+    }
 }
 
 .modal {

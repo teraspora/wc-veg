@@ -52,10 +52,10 @@
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <br>
-            <div class="flash-msgs">
+            <div class="flash-msgs card orange accent-2">
               <ul class="flashes">
                 {% for message in messages %}
-                  <li class = "cyan-text text-accent-4">{{ message }}</li>
+                  <li class = "black-text">{{ message }}</li>
                 {% endfor %}
               </ul>
             </div>
