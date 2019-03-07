@@ -11,7 +11,8 @@ body, html {
     background-image: url("../images/green-veg.jpg");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
+    font-family: GillSans, Calibri, Trebuchet, sans-serif; 
 }
 
 header {
@@ -161,4 +162,17 @@ td {
 
 .sidenav-overlay {
     z-index: 0;
+}
+
+.links {
+    width: 50%;
+    text-align: center;
+    font-size: 1.6vw;
+    margin: auto;
+    padding-bottom: 5vh;
+    font-weight: bold;
+}
+
+.modal {
+    border: 5px solid black;
 }
