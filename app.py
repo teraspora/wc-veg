@@ -72,6 +72,11 @@ def about():
     return render_template("about.html", uname = user.name, anon = anon, num_vegs = num_vegs,
         num_genera = num_genera, num_categories = num_categories, num_creators = num_creators)
 
+@app.route("/links")
+def links():
+    """ Show useful, relevant links. """
+    return render_template("links.html")
+
 @app.route("/veg", methods = ["GET", "POST"])
 def veg():
     """ Register user / Show a table of all veg in database. """   
