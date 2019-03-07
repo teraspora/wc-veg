@@ -167,10 +167,18 @@ td {
 .links {
     width: 50%;
     text-align: center;
-    font-size: 1.6vw;
+    font-size: 2vw;
     margin: auto;
     padding-bottom: 5vh;
     font-weight: bold;
+}
+
+.links a:hover {
+    transform: scale(1.05);
+}
+
+.links p {
+    font-size: 1.4vw;
 }
 
 .modal {
