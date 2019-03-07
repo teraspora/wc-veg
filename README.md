@@ -51,7 +51,33 @@ I conceived the design in my head and made a couple of sketches on paper (scans 
 
 I tried to give the site a natural feel with browns and greens and a background of green leafy vegetables.
 
-## Features
+### Features
+
+- Upon login, or subsequent to clicking "Browse Veg" the user sees displayed a table of all the vegetables in the database.
+
+- All pages feature a navigation bar at the top, with links to browse the vegetables, see useful links, or login / logout.  The user can click "About" for an overview of the site, or "Links" for a list of useful links.   For registered users there is also a link to add a vegetable to the database.
+
+- For each vegetable in the list the common name, genus, species and category are shown, and the username of the entry's creator, together with buttons to show a detailed view, and for registered users buttons to edit or delete the vegetable.   The delete option features a modal confirmation dialogue to mitigate the chances of an inadvertant deletion.
+
+- For registered users there is also a well placed "Add Vegetable" link at the top of the list in addition to the one in the navbar.
+
+- As well as information about the site, the "About" page displays live up-to-date statistics about the database and brief details regarding its development.
+
+- The forms to add and edit vegetable entries have sensible defaults for which fields are required and which are not editable, and for exampe allow only alphabetic characters in common names, genera and species.
+
+- When editing or adding a vegetable, the user has the option of uploading a photograph, which will be saved and displayed in the detailed view.
+
+### Features Left to Implement
+
+- Multiple photos for each vegetable.
+
+- More fields, for properties like soil type, recommended acidity (pH value), time to sow (outside / inside), time to plant out, time to harvest, nutrient needs, tips and tricks, together with the ability to sort and filter by these fields.
+
+- A blog page where expert gardeners can share their ideas about organic vegetable growing in West Cork.
+
+- Proper, secure user registration and authorisation.
+
+- Any features subsequently requested if thought to be useful and feasible.
 
 ## Technologies Used
 
