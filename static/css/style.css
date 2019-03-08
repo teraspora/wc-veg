@@ -198,6 +198,9 @@ td {
 
 .links p {
     font-size: 1.4vw;
+    line-height: 200%;
+    font-weight: normal;
+    font-style: italic;
 }
 
 @media only screen and (max-width: 1024px) {
