@@ -79,6 +79,8 @@ I tried to give the site a natural feel with browns and greens and a background 
 
 - Any features subsequently requested if thought to be useful and feasible.
 
+- Augmented and improved content.
+
 ## Technologies Used
 
 I developed the app on my local machine, coding in Sublime Text 3 using Emmet, and running a standard Bash terminal in Ubuntu 18.   My default browser is Chrome 70/71 but from time to time I also check how the app appears in Firefox Developer Edition, and on tablet browsers.
