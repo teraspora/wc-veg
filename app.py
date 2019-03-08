@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET")
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 app.config["MONGO_DBNAME"] = "wc-veg"            
-app.config['MAX_CONTENT_LENGTH'] = 2097152  # byte size limit for file upload            
+app.config['MAX_CONTENT_LENGTH'] = 2097152  # 2 Mbyte size limit for file upload            
 mongo = PyMongo(app)
 
 # Keep a list of known users
@@ -21,7 +21,7 @@ users = []
 userid = -1
 anon = True     # means no user logged in so edit/delete not available
 
-sort_fields = ["common_name", "genus", "species", "category_name", "creator"]
+sort_fields = ["common_name", "genus", "category_name", "creator"]
 filter_fields = ["genus", "category_name", "creator"]
 
 class User:
@@ -156,7 +156,7 @@ def insertveg():
                 else v for k, v in new_veg.items()}
         try:
             img = request.files['file']
-            filepath = os.path.join(ROOT, 'static', f'images/{new_veg["common_name"].lower()}.{get_normalised_extension(img.filename)}')
+            filepath = os.path.join(ROOT, 'static', f'images/{new_veg["common_name"].replace(" ", "")}.{get_normalised_extension(img.filename)}')
             img.save(filepath)
         except:
             pass
@@ -225,7 +225,7 @@ def showveg(veg_id):
     """ Show details for an individual veg. """
     user = set_user()    
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
-    image_path = os.path.join("static", "images", veg["common_name"].lower())
+    image_path = os.path.join("static", "images", veg["common_name"].replace(" ", ""))
     
     if os.path.isfile(image_path + '.jpg'):
         ext = '.jpg'
