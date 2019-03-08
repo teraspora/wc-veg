@@ -98,7 +98,6 @@ header * {
 
 .main-link:hover {
     transform: scale(1.08);
-    background: yellow;
 }
 
 .btn-login {
