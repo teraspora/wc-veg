@@ -74,13 +74,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">add_a_photo</i>
-                <input name="file" id="file" type="file"
-                <label for="file">Upload a photograph</label>
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Upload a Photo</span>
+              <input type="file" name="file" id="file" >
             </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
         </div>
-       5<button class="btn text-bold black-text green accent-4  waves-effect waves-light" type="submit" name="action">Update Database
+       <button class="btn text-bold black-text green accent-4  waves-effect waves-light" type="submit" name="action">Update Database
             <i class="material-icons right">send</i>
         </button>
         <button class="btn text-bold black-text orange accent-4  waves-effect waves-light right" name="action"><a href="{{ url_for('veg') }}">Cancel</a>
@@ -89,3 +93,5 @@
     </form>
 </div>
 {% endblock %} 
+
+<!-- <i class="material-icons prefix">add_a_photo</i> -->
