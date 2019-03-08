@@ -31,6 +31,18 @@ class User:
         self.name = name
         self.admin = admin
 
+def set_user():
+    """ Get user from session, else set to anon.   Return user """
+    userid = session.get("userid", None)
+    
+    if userid is None or userid < 0:
+        anon = True
+        user = User('anon', False)
+    else:
+        anon = False
+        user = users[userid]
+    return user
+
 def get_normalised_extension(filename_string):
     """ Return the substring after the dot in a filename, 
     converted to lowercase and with .jpeg changed to .jpg
@@ -55,13 +67,7 @@ def login():
 @app.route("/about")
 def about():
     """ Show info about the site. """
-    userid = session.get("userid", None)
-    if userid is None or userid < 0:
-        anon = True
-        user = User('anon', False)
-    else:
-        anon = False
-        user = users[userid]
+    user = set_user()
 
     veg_list = mongo.db.vegetables
     num_vegs = veg_list.count_documents({})
@@ -75,7 +81,7 @@ def about():
 @app.route("/links")
 def links():
     """ Show useful, relevant links. """
-    return render_template("links.html")
+    return render_template("links.html", anon = anon)
 
 @app.route("/veg", methods = ["GET", "POST"])
 def veg():
@@ -95,15 +101,9 @@ def veg():
         session["userid"] = userid # save userid on client
         anon = False
     
-    userid = session.get("userid", None)
-    if userid is None or userid < 0:
-        anon = True
-        user = User('anon', False)
-    else:
-        anon = False
-        user = users[userid]
+    user = set_user()
     
-    return render_template("veg.html", veg = mongo.db.vegetables.find(), anon = anon, uname = user.name)
+    return render_template("veg.html", veg = mongo.db.vegetables.find(), anon = user.name == 'anon', uname = user.name)
 
 @app.route("/sortveg/<string:sort_field>")
 def sortveg(sort_field):
@@ -112,16 +112,9 @@ def sortveg(sort_field):
     else:
         veg = mongo.db.vegetables.find().sort(sort_field) 
 
-    userid = session.get("userid", None)
+    user = set_user()
     
-    if userid is None or userid < 0:
-        anon = True
-        user = User('anon', False)
-    else:
-        anon = False
-        user = users[userid]
-    
-    return render_template("veg.html", veg = veg, anon = anon, uname = user.name)
+    return render_template("veg.html", veg = veg, anon = user.name == 'anon', uname = user.name)
 
 @app.route("/filterveg/<string:filter_field>/<string:value>")
 def filterveg(filter_field, value):
@@ -131,32 +124,26 @@ def filterveg(filter_field, value):
         veg = mongo.db.vegetables.find({filter_field: value})
         flash(f'Showing entries with {filter_field}:  {value}.')
 
-    userid = session.get("userid", None)
-    if userid is None or userid < 0:
-        anon = True
-        user = User('anon', False)
-    else:
-        anon = False
-        user = users[userid]
+    user = set_user()
     
-    return render_template("veg.html", veg = veg, anon = anon, uname = user.name)
+    return render_template("veg.html", veg = veg, anon = user.name == 'anon', uname = user.name)
 
 @app.route("/addveg")
 def addveg():
     """ Render a form to allow user to add a new veg to database. """
     userid = session.get("userid", None)
     if userid is None or userid < 0:
-        return redirect(url_for("login"))
-    user = users[userid]    
-    return render_template("addveg.html", categories = mongo.db.categories.find(), uname = user.name)
+        return redirect(url_for("login"))   # Unregisterd users have no update permissions
+    user = users[userid]    # Now we know it's a registered user   
+    return render_template("addveg.html", categories = mongo.db.categories.find(), anon = False, uname = user.name)
 
 @app.route("/insertveg", methods = ["POST"]) 
 def insertveg():
     """ Insert the new document into database and then show the full veg table. """
     userid = session.get("userid", None)
     if userid is None:
-        return redirect(url_for("login"))
-    user = users[userid]
+        return redirect(url_for("login"))   # Unregisterd users have no update permissions
+    user = users[userid]    # Now we know it's a registered user
     new_veg = request.form.to_dict()
     # Add a 'creator' field with the user's name
     new_veg['creator'] = user.name
@@ -179,25 +166,25 @@ def insertveg():
         # if user has tried to create duplicate entry
         flash(f'{ vname.capitalize() } is already in the database.')
 
-    return redirect(url_for("veg"))
+    return redirect(url_for("veg", ))
 
 @app.route("/editveg/<veg_id>")
 def editveg(veg_id):
     """ Render a form to allow user to edit a veg. """
     userid = session.get("userid", None)
     if userid is None or userid < 0:
-        return redirect(url_for("index"))
+        return redirect(url_for("login"))
     user = users[userid]
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
     cats = mongo.db.categories.find()
-    return render_template("editveg.html", veg = veg, categories = cats, uname = user.name)
+    return render_template("editveg.html", veg = veg, categories = cats, anon = False, uname = user.name)
 
 @app.route("/updateveg/<veg_id>", methods = ['POST'])
 def updateveg(veg_id):
     """ Insert the amended document into database and then show the updated veg table. """
     userid = session.get("userid", None)
     if userid is None or userid < 0:
-        return redirect(url_for("index"))
+        return redirect(url_for("login"))
     user = users[userid]
     veg_list = mongo.db.vegetables
     vname = veg_list.find_one({'_id': ObjectId(veg_id)})["common_name"]
@@ -225,7 +212,7 @@ def deleteveg(veg_id):
     """ Delete a document from the database and then show the updated veg table. """
     userid = session.get("userid", None)
     if userid is None or userid == -1:
-        return redirect(url_for("index"))
+        return redirect(url_for("login"))
     user = users[userid]
     veg_list = mongo.db.vegetables
     vname = veg_list.find_one({'_id': ObjectId(veg_id)})["common_name"]
@@ -236,14 +223,7 @@ def deleteveg(veg_id):
 @app.route("/showveg/<veg_id>")
 def showveg(veg_id):
     """ Show details for an individual veg. """
-    userid = session.get("userid", None)
-    if userid is None or userid == -1:
-        anon = True
-        user = User('anon', False)
-    else:
-        anon = False
-        user = users[userid]
-    
+    user = set_user()    
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
     image_path = os.path.join("static", "images", veg["common_name"].lower())
     
@@ -253,7 +233,7 @@ def showveg(veg_id):
         ext = '.png'
     else:
         ext = ''
-    return render_template("showveg.html", veg = veg, uname = user.name, ext = ext, anon = anon)
+    return render_template("showveg.html", veg = veg, uname = user.name, ext = ext, anon = user.name == 'anon')
     
 if __name__ == "__main__":
     app.run(host = os.environ.get('IP', "0.0.0.0"),
