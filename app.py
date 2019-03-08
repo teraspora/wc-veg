@@ -202,7 +202,7 @@ def updateveg(veg_id):
     veg_list = mongo.db.vegetables
     vname = veg_list.find_one({'_id': ObjectId(veg_id)})["common_name"]
     veg_list.update({'_id': ObjectId(veg_id)}, {'$set':{
-            "genus": request.form.get("genus").capitalize(),
+            "genus": request.form.get("genus").lower(),
             "species" : request.form.get("species").lower(),
             "category_name": request.form.get("category_name"),
             "other_names" : request.form.get("other_names"),
