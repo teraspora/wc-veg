@@ -164,8 +164,8 @@ def insertveg():
     veg_list = mongo.db.vegetables
     # Only add if not already in collection
     if veg_list.count_documents({"common_name": vname}) == 0:
-        # Capitalise common_name & genus; make species lowercase: 
-        new_veg = {k: v.capitalize() if k == 'genus' or k == 'common_name' else v.lower() if k == 'species' 
+        # Make common_name,genus and species all lowercase for saving in database: 
+        new_veg = {k: v.lower() if k == 'genus' or k == 'common_name' or k == 'species' 
                 else v for k, v in new_veg.items()}
         try:
             img = request.files['file']
