@@ -24,11 +24,11 @@
 
 	    <table border = 5>
         <tr class = "lime accent-1">
-          <th class = "field-name common_name"> <a href = {{ url_for('sortveg', sort_field = 'common_name') }}>Common Name</a> </th>
-            <td class = "field-name genus"> <a href = {{ url_for('sortveg', sort_field = 'genus') }}>Genus</a> </td>
+          <th class = "field-name common_name sortable"> <a href = {{ url_for('sortveg', sort_field = 'common_name') }}>Common Name</a> </th>
+            <td class = "field-name genus sortable"> <a href = {{ url_for('sortveg', sort_field = 'genus') }}>Genus</a> </td>
             <td class = "field-name species"> <a href = {{ url_for('sortveg', sort_field = 'species') }}>Species</a> </td>
-            <td class = "field-name category_name"> <a href = {{ url_for('sortveg', sort_field = 'category_name') }}>Category</a> </td>
-            <td class = "field-name creator"> <a href = {{ url_for('sortveg', sort_field = 'creator') }}>Creator</a> </td>
+            <td class = "field-name category_name sortable"> <a href = {{ url_for('sortveg', sort_field = 'category_name') }}>Category</a> </td>
+            <td class = "field-name creator sortable"> <a href = {{ url_for('sortveg', sort_field = 'creator') }}>Creator</a> </td>
         </tr>
         {% for v in veg %}
          <!-- Modal dialog - should only display when triggered above -->

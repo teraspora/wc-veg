@@ -161,7 +161,7 @@ h5 {
     padding-left: 1vw;
 }
 
-.filterable:hover {
+.filterable:hover, .sortable:hover {
     transform: scale(1.1);
     border: 2px solid black;
     background-color: #fff1d0;
