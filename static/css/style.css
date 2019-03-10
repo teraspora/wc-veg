@@ -218,3 +218,7 @@ td {
 .modal {
     border: 5px solid black;
 }
+
+img {
+    margin: auto;
+}
