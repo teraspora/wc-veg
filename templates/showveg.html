@@ -15,7 +15,9 @@
 
 <div class="card">
   <div class="center card-content">
-    <img src="{{ url_for('static', filename='images/' + veg.common_name.replace(' ', '') + ext) }}" alt="Photo of {{ veg.common_name.capitalize() }}">
+    <img src="{{ url_for('static', filename='images/' + veg.common_name.replace(' ', '') + ext) if not 'main_image' in veg 
+    else 'data:image/' + veg.image_type + ';base64,' + veg.main_image.decode('utf-8') }}"
+     alt="Photo of {{ veg.common_name.capitalize() }}">
   </div>
   <div class="card-tabs">
     <ul class="tabs tabs-fixed-width">

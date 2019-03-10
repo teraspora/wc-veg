@@ -5,6 +5,8 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.utils import secure_filename
 
+import base64
+
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 ROOT = os.path.realpath(os.path.dirname(__file__))
 
@@ -147,20 +149,27 @@ def insertveg():
     new_veg = request.form.to_dict()
     # Add a 'creator' field with the user's name
     new_veg['creator'] = user.name
-    vname = new_veg["common_name"]
+    vname = new_veg["common_name"].lower()
     veg_list = mongo.db.vegetables
     # Only add if not already in collection
     if veg_list.count_documents({"common_name": vname}) == 0:
         # Make common_name,genus and species all lowercase for saving in database: 
         new_veg = {k: v.lower() if k == 'genus' or k == 'common_name' or k == 'species' 
                 else v for k, v in new_veg.items()}
+        veg_list.insert_one(new_veg)
         try:
             img = request.files['file']
-            filepath = os.path.join(ROOT, 'static', f'images/{new_veg["common_name"].replace(" ", "")}.{get_normalised_extension(img.filename)}')
-            img.save(filepath)
+            # filepath = os.path.join(ROOT, 'static', f'images/{vname.lower()}.{get_normalised_extension(img.filename)}')
+            # img.save(filepath)
+            ext = img.mimetype.rsplit('/', 1)[1].lower()    # get the subtype as a string
+            veg_list.update({'common_name': vname}, {'$set':{"main_image" : base64.b64encode(img.read()),
+                "image_type": ext}})   # Store image as base64-encoded string; also store "image_type" - "png" or "jpeg" 
         except:
+            print(f'\n\n***\nEXC\n***\n\nimg: {img}')
             pass
-        veg_list.insert_one(new_veg)
+
+        print(f'\n\n***\nBUG\n***\n\nimg: {img}')
+    
         flash(f'{ vname.capitalize() } added to database.')
     else:
         # if user has tried to create duplicate entry
@@ -190,20 +199,26 @@ def updateveg(veg_id):
     vname = veg_list.find_one({'_id': ObjectId(veg_id)})["common_name"]
     veg_list.update({'_id': ObjectId(veg_id)}, {'$set':{
             "genus": request.form.get("genus").lower(),
-            "species" : request.form.get("species").lower(),
+            "species": request.form.get("species").lower(),
             "category_name": request.form.get("category_name"),
-            "other_names" : request.form.get("other_names"),
-            "description" : request.form.get("description"),
-            "grow_notes" : request.form.get("grow_notes"),
-            "cook_notes" : request.form.get("cook_notes")        
+            "other_names": request.form.get("other_names"),
+            "description": request.form.get("description"),
+            "grow_notes": request.form.get("grow_notes"),
+            "cook_notes": request.form.get("cook_notes")        
         }})
     
     try:
         img = request.files['file']
-        filepath = os.path.join(ROOT, 'static', f'images/{vname.lower()}.{get_normalised_extension(img.filename)}')
-        img.save(filepath)
+        # filepath = os.path.join(ROOT, 'static', f'images/{vname.lower()}.{get_normalised_extension(img.filename)}')
+        # img.save(filepath)
+        ext = img.mimetype.rsplit('/', 1)[1].lower()    # get the subtype as a string
+        veg_list.update({'_id': ObjectId(veg_id)}, {'$set':{"main_image" : base64.b64encode(img.read()),
+            "image_type": ext}})   # Store image as base64-encoded string; also store "image_type" - "png" or "jpeg" 
     except:
         pass
+        # print(f'\n\n***\nEXC\n***\n\nimg: {img}')
+
+    # print(f'\n\n***\nBUG\n***\n\nimg: {img}')
     flash(f'{ vname.capitalize() } updated in database.')
     return redirect(url_for("veg"))
 
@@ -225,6 +240,7 @@ def showveg(veg_id):
     """ Show details for an individual veg. """
     user = set_user()    
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
+    
     image_path = os.path.join("static", "images", veg["common_name"].replace(" ", ""))
     
     if os.path.isfile(image_path + '.jpg'):
@@ -235,7 +251,15 @@ def showveg(veg_id):
         ext = ''
     return render_template("showveg.html", veg = veg, uname = user.name, ext = ext, anon = user.name == 'anon')
     
+
+
+
+
+
+
+
 if __name__ == "__main__":
+    print("\n***************\nStarting app...\n***************\n")
     app.run(host = os.environ.get('IP', "0.0.0.0"),
             port = int(os.environ.get('PORT', "5000")),
-            debug = False)
+            debug = True)
