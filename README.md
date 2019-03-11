@@ -180,7 +180,9 @@ Following communication with a Code Institute tutor, in which she said
 > limitations of heroku)."
 
 I have decided to deploy the master branch for my project submission, i.e. the one which stores user-uploaded images in the ephemeral Heroku file system.
-The alternative, in git branch `base64test` in the Github repo, shows the code I have used to base64-encode the images and save them as bytestrings in the MongoDB database.   
+The alternative, in git branch `base64test` in the Github repo, shows the code I have used to base64-encode the images and save them as bytestrings in the MongoDB database. 
+
+I have left a test entry in the database, named 'Africa', to demonstrate the fetching, decoding and display of a base64-encoded image from the database.  
 
 ## Deployment
 
