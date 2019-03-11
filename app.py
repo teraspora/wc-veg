@@ -1,3 +1,7 @@
+# app.py
+# Part of the "West Cork Veg" Python/Flask/MongoDB web application built by John Lynch, ©John Lynch 2019
+# Source repo at https://github.com/teraspora/wc-veg
+
 import os
 import sys
 from flask import Flask, request, render_template, redirect, url_for, session, flash
@@ -107,6 +111,7 @@ def veg():
 
 @app.route("/sortveg/<string:sort_field>")
 def sortveg(sort_field):
+    """ Show a table of all veg in database, sorted by the specified field. """
     if sort_field not in sort_fields:
         veg = mongo.db.vegetables.find()
     else:
@@ -118,6 +123,7 @@ def sortveg(sort_field):
 
 @app.route("/filterveg/<string:filter_field>/<string:value>")
 def filterveg(filter_field, value):
+    """ Show a table of all veg in database, filtered by the specified field. """
     if filter_field not in filter_fields:
         veg = mongo.db.vegetables.find()
     else:
@@ -224,7 +230,10 @@ def deleteveg(veg_id):
 def showveg(veg_id):
     """ Show details for an individual veg. """
     user = set_user()    
-    veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
+    veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})    
+
+    # Collect info about any image existing in the filesystem; won't be needed if there's a base64-encoded string 
+    # in the database; we test for this inside the showveg.html template rendered.
     image_path = os.path.join("static", "images", veg["common_name"].replace(" ", ""))
     
     if os.path.isfile(image_path + '.jpg'):
@@ -235,7 +244,11 @@ def showveg(veg_id):
         ext = ''
     return render_template("showveg.html", veg = veg, uname = user.name, ext = ext, anon = user.name == 'anon')
     
+# *************** END OF FUNCTION DEFINITIONS ***************
+
 if __name__ == "__main__":
     app.run(host = os.environ.get('IP', "0.0.0.0"),
             port = int(os.environ.get('PORT', "5000")),
             debug = False)
+
+# *************** END OF app.py ***************
