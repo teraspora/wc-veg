@@ -114,6 +114,57 @@ Extensive testing was required, and accessing pages from different starting poin
 
 I tested mobile responsiveness in Chrome Dev Tools and on my Android tablet and Android phone.
 
+### Interesting Bugs
+
+I have had an issue with user uploads of images to my Heroku server.
+At first, and for a short time, an uploaded image is displayed correctly, but after an hour it seems to have disappeared.
+
+Details below.
+
+Steps to reproduce the issue:
+
+1. Log in with a username of > 4 letters. You are taken to veg.html, a table of all the veg.
+2. Click "Add a vegetable".   You are taken to addveg.html.
+3. Fill in common name, genus and species fields (letters only).
+4. Click "Upload a Photo". Select a (small) photo and click OK.
+5. Click "Add to database".   The photo should upload, then you will be redirected back to the listing.
+6. Click "Show" against the name of the vegetable you added.   You should see the image you uploaded.
+7. Go back to the listing, wait a minute, then click "Show" again.   You should still see the image.
+8. Wait an hour and try again.   
+
+Expected state and behaviour:
+
+1. The image is uploaded to the static/images folder when you click "Add to database"
+2. It is downloaded and displayed correctly by any browser displaying showveg.html.
+3. It remains stored in the static/images folder on the server, and will be displayed at any time by any browser which requests the showveg.html page.
+
+Actual state and behaviour:
+
+1. & 2. The above expected behaviour seems to work for a few minutes after uploading.
+3. After an hour the image is not displayed as expected.
+
+#### Notes:
+
+If I log into my Heroku server with 'heroku run bash' and I cd into the static/images folder, I only see the image files I have pushed to the server via git.   I don't see any user-uploaded files.   In particular I don't see the file I just uploaded, even when my browser is correctly displaying it.
+
+#### Cause:
+
+I've discovered that user-uploaded images will disappear because the Heroku filesystem is ephemeral - that means that any changes to the filesystem whilst the dyno is running only last until that dyno is shut down or restarted.
+
+#### Solution:
+
+I looked into storing the images elsewhere in the Cloud, e.g. using S3 or GCP.   I scanned through the documentation for getting these up and running and implemented in Python/Flask, and judged that it would take some time to get all the configuration right.   
+
+The other option I considered was base-64-encoding the images and storing them in the database as strings.   Investigation revealed that Python has a `base64` module which provides precisely the methods necessary to do base 64 encoding and decoding.
+
+A couple of tests showed that the resultant file sizes were only about 10% bigger and the encoding (using `b64encode()`) and decoding (using `b64decode()`) seemed to happen in a fraction of a second for a 500kB file.
+
+More tests showed that the data gets stored as `\<binarydata\>` in the database and needs to be decoded not with `b64decode()` but with the  the built-in `str.decode()` method.
+
+I also save the mimetype as a three-character string (`"png"` or `"jpg"`) in the database so I can use it in the `src` property of the `\<img\>` tag in `showveg.html` when it needs to be displayed to the user.
+
+This solution works fine, except that it seems to slow down the application, in the sense that pages are slow to load.   This slowdown seems to happen also on pages where no encoding or decoding takes place, which seems strange.   At the time of writing I have not yet debugged this slowdown, and this permanent starage solution remains in git branch `base64test`, not merged into the `master` branch.
+
 ## Deployment
 
 The app is deployed to Heroku and can be accessed at [West Cork Veg][8].
