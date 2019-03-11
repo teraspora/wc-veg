@@ -159,9 +159,9 @@ The other option I considered was base-64-encoding the images and storing them i
 
 A couple of tests showed that the resultant file sizes were only about 10% bigger and the encoding (using `b64encode()`) and decoding (using `b64decode()`) seemed to happen in a fraction of a second for a 500kB file.
 
-More tests showed that the data gets stored as `\<binarydata\>` in the database and needs to be decoded not with `b64decode()` but with the  the built-in `str.decode()` method.
+More tests showed that the data gets stored as `<binarydata>` in the database and needs to be decoded not with `b64decode()` but with the  the built-in `str.decode()` method.
 
-I also save the mimetype as a three-character string (`"png"` or `"jpg"`) in the database so I can use it in the `src` property of the `\<img\>` tag in `showveg.html` when it needs to be displayed to the user.
+I also save the mimetype as a three-character string (`"png"` or `"jpg"`) in the database so I can use it in the `src` property of the `<img>` tag in `showveg.html` when it needs to be displayed to the user.
 
 This solution works fine, except that it seems to slow down the application, in the sense that pages are slow to load.   This slowdown seems to happen also on pages where no encoding or decoding takes place, which seems strange.   At the time of writing I have not yet debugged this slowdown, and this permanent starage solution remains in git branch `base64test`, not merged into the `master` branch.
 
