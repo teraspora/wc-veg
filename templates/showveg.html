@@ -15,7 +15,7 @@
 
 <div class="card">
   <div class="center card-content">
-    <img src="{{ url_for('static', filename='images/' + veg.common_name.replace(' ', '') + ext) }}" alt="Photo of {{ veg.common_name.capitalize() }}">
+    <img class = "materializeboxed center-align" src="{{ url_for('static', filename='images/' + veg.common_name.replace(' ', '') + ext) }}" alt="Photo of {{ veg.common_name.capitalize() }}">
   </div>
   <div class="card-tabs">
     <ul class="tabs tabs-fixed-width">
