@@ -81,6 +81,12 @@ I tried to give the site a natural feel with browns and greens and a background 
 
 - Augmented and improved content.
 
+- Persistence of user-uploaded images (see the section "Interesting Bugs" below in this README.)
+
+- As the site grows, with more entries, maybe I will create fields for planting time, harvest time, nutrient requirements, soil type etc..   This will depend on what users want and what feels appropriate and useful to me.
+
+- The project is open-source so I am open tto pull requests.
+
 ## Technologies Used
 
 I developed the app on my local machine, coding in Sublime Text 3 using Emmet, and running a standard Bash terminal in Ubuntu 18.   My default browser is Chrome 70/71 but from time to time I also check how the app appears in Firefox Developer Edition, and on tablet browsers.
@@ -164,6 +170,17 @@ More tests showed that the data gets stored as `<binarydata>` in the database an
 I also save the mimetype as a three-character string (`"png"` or `"jpg"`) in the database so I can use it in the `src` property of the `<img>` tag in `showveg.html` when it needs to be displayed to the user.
 
 This solution works fine, except that it seems to slow down the application, in the sense that pages are slow to load.   This slowdown seems to happen also on pages where no encoding or decoding takes place, which seems strange.   At the time of writing I have not yet debugged this slowdown, and this permanent starage solution remains in git branch `base64test`, not merged into the `master` branch.
+
+#### Update:
+
+Following communication with a Code Institute tutor, in which she said
+
+>  "It's absolutely fine to stick with Heroku and document the ephemerality of it's filesystem. The assessor will be much more
+> interested in how you've set up and queried your database and in the code you've written to run your project (rather than the
+> limitations of heroku)."
+
+I have decided to deploy the master branch for my project submission, i.e. the one which stores user-uploaded images in the ephemeral Heroku file system.
+The alternative, in git branch `base64test` in the Github repo, shows the code I have used to base64-encode the images and save them as bytestrings in the MongoDB database.   
 
 ## Deployment
 
