@@ -54,7 +54,7 @@ def get_normalised_extension(filename_string):
 
 # Copied from http://flask.pocoo.org/docs/1.0/patterns/fileuploads/ and refactored:
 def allowed_file(filename):
-    """ Check if image filename valid """
+    """ Check if image filename is valid; return a boolean """
     return '.' in filename and get_normalised_extension(filename) in ALLOWED_EXTENSIONS
 
 @app.route("/")
@@ -109,6 +109,7 @@ def veg():
 
 @app.route("/sortveg/<string:sort_field>")
 def sortveg(sort_field):
+    """ Show a table of all veg in database, sorted by the specified field. """
     if sort_field not in sort_fields:
         veg = mongo.db.vegetables.find()
     else:
@@ -120,6 +121,7 @@ def sortveg(sort_field):
 
 @app.route("/filterveg/<string:filter_field>/<string:value>")
 def filterveg(filter_field, value):
+    """ Show a table of all veg in database, filtered by the specified field. """
     if filter_field not in filter_fields:
         veg = mongo.db.vegetables.find()
     else:
@@ -241,25 +243,24 @@ def showveg(veg_id):
     user = set_user()    
     veg = mongo.db.vegetables.find_one({"_id": ObjectId(veg_id)})
     
+    # Collect info about any image existing in the filesystem; won't be needed if there's a base64-encoded string 
+    # in the database; we test for this inside the showveg.html template.
     image_path = os.path.join("static", "images", veg["common_name"].replace(" ", ""))
-    
     if os.path.isfile(image_path + '.jpg'):
         ext = '.jpg'
     elif os.path.isfile(image_path + '.png'):
         ext = '.png'
     else:
         ext = ''
+
     return render_template("showveg.html", veg = veg, uname = user.name, ext = ext, anon = user.name == 'anon')
-    
 
-
-
-
-
-
+# *************** END OF FUNCTION DEFINITIONS ***************
 
 if __name__ == "__main__":
     print("\n***************\nStarting app...\n***************\n")
     app.run(host = os.environ.get('IP', "0.0.0.0"),
             port = int(os.environ.get('PORT', "5000")),
             debug = True)
+
+# *************** END OF app.py ***************
